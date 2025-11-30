@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTC Dashboard</title>
+
+    <style>
+        body {
+            background-image: url("/flags.jpeg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-family: Arial, sans-serif;
+        }
+
+        .welcome-card {
+            max-width: 600px;
+            width: 90%;
+
+            /* translucent card like your login page */
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(4px);
+
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            color: navy;
+            font-weight: bold;
+        }
+
+        p {
+            color: navy;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .btn {
+            text-decoration: none;
+            display: inline-block;
+            padding: 0.7rem 1.4rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0.3rem;
+        }
+
+        .btn-primary {
+            background-color: navy;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #001a66;
+        }
+
+        .btn-danger {
+            background-color: #cc0000;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #990000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="welcome-card">
+        <h1>Welcome to the INTEX Dashboard!</h1>
+    </div>
+
+</body>
+</html>
