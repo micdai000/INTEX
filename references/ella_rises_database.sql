@@ -1,7 +1,7 @@
 -- ============================================
 -- Ella Rises Database - PostgreSQL Script
 -- Generated from normalized data (3NF with IDs)
--- Standard PostgreSQL naming (lowercase, snake_case)
+-- snake_case naming convention
 -- ============================================
 
 -- Drop tables in reverse dependency order
@@ -43,7 +43,7 @@ CREATE TABLE event (
     event_default_capacity INTEGER
 );
 
--- nps lookup table (natural key)
+-- nps lookup table (natural key) - scores 1-5
 CREATE TABLE nps (
     survey_recommendation_score DECIMAL(3,1) PRIMARY KEY,
     survey_nps_bucket VARCHAR(50)
@@ -1305,7 +1305,8 @@ INSERT INTO event (event_id, event_name, event_type, event_description, event_re
 INSERT INTO event (event_id, event_name, event_type, event_description, event_recurrence_pattern, event_default_capacity) VALUES (14, 'Community STEM Hackathon', 'STEM', 'Collaborative, problem-solving challenges in coding and engineering.', 'Monthly', 120);
 INSERT INTO event (event_id, event_name, event_type, event_description, event_recurrence_pattern, event_default_capacity) VALUES (15, 'Women in Tech & Art Showcase', 'Annual Conference', 'Celebration of female innovation across STEAM industries.', 'Annual', 500);
 
--- nps data
+-- nps data (scores 1-5)
+INSERT INTO nps (survey_recommendation_score, survey_nps_bucket) VALUES (1, 'Detractor');
 INSERT INTO nps (survey_recommendation_score, survey_nps_bucket) VALUES (2, 'Detractor');
 INSERT INTO nps (survey_recommendation_score, survey_nps_bucket) VALUES (3, 'Detractor');
 INSERT INTO nps (survey_recommendation_score, survey_nps_bucket) VALUES (4, 'Passive');
