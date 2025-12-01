@@ -1,0 +1,342 @@
+================================================================================
+ELLA RISES INTEX PROJECT PLAN
+Fall 2025 - 4 Team Members
+================================================================================
+
+PROJECT OVERVIEW
+--------------------------------------------------------------------------------
+| Course | Weight | Primary Focus                                    |
+|--------|--------|--------------------------------------------------|
+| IS 402 | 25%    | Database (Normalization, ERD, SQL Scripts)       |
+| IS 403 | 25%    | Node/Express Web App (CRUD, Auth, UI)            |
+| IS 404 | 25%    | AWS Deployment (RDS, DNS, HTTPS, 418)            |
+| IS 415 | 25%    | Analytics (Python EDA, Tableau Dashboard, Slides)|
+--------------------------------------------------------------------------------
+
+DEADLINE: Friday 12/5 by 11:00am (deliverables)
+PRESENTATION: Friday 12/5 (20 min + 5 min Q&A)
+
+
+================================================================================
+DEPENDENCY GRAPH
+================================================================================
+
+PHASE 1 (Parallel Start - Days 1-2)
+├── [A] Database Normalization ──┐
+├── [B] Python EDA (raw data)    │
+├── [C] Express skeleton + UI    ├──→ PHASE 2
+└── [D] AWS account + DNS setup ─┘
+
+PHASE 2 (After Normalization - Days 3-4)
+├── [A] SQL Scripts + ERD ───────┐
+├── [B] Tableau Dashboard design │
+├── [C] Auth system (login/roles)├──→ PHASE 3
+└── [D] AWS RDS + deploy skeleton┘
+
+PHASE 3 (After DB deployed - Days 5-6)
+├── [A] Participants CRUD
+├── [B] Events CRUD
+├── [C] Surveys + Milestones CRUD
+└── [D] Donations CRUD + Dashboard embed
+
+PHASE 4 (Integration - Day 7)
+├── All: Testing & Bug Fixes
+├── [B] Embed Tableau dashboard
+├── [D] HTTPS + HTTP 418 page
+└── All: Polish & Professionalism
+
+PHASE 5 (Deliverables - Day 8)
+├── Each person: Record their course video
+├── Compile: README, slides, code
+└── All: Practice presentation
+
+
+================================================================================
+TASK ASSIGNMENTS BY TEAM MEMBER
+================================================================================
+
+--------------------------------------------------------------------------------
+PERSON A - DATABASE LEAD (IS 402)
+--------------------------------------------------------------------------------
+Phase | Task                                          | Depends On      | Points
+------|-----------------------------------------------|-----------------|-------
+1     | Normalize data (1NF → 2NF → 3NF spreadsheet)  | Nothing         | 20
+1     | Create ERD with cardinality/optionality       | Normalization   | 20
+2     | Write SQL scripts (CREATE + INSERT)           | ERD             | 20
+3     | Build Participants CRUD pages                 | DB deployed     | 18
+4     | Get AI feedback on presentation               | Draft slides    | 5
+5     | Record IS 402 video                           | All 402 tasks   | -
+
+IS 402 Rubric Breakdown:
+- Spreadsheet showing normalization steps: 20 pts
+- Data normalized properly to 3NF w/ IDs: 20 pts
+- ERD with cardinality/optionality: 20 pts
+- SQL Scripts (build DB + insert data): 20 pts
+- App reads/updates from DB: 10 pts
+- PostgreSQL or MySQL used: 5 pts
+- AI feedback document: 5 pts
+
+--------------------------------------------------------------------------------
+PERSON B - ANALYTICS LEAD (IS 415)
+--------------------------------------------------------------------------------
+Phase | Task                                          | Depends On      | Points
+------|-----------------------------------------------|-----------------|-------
+1     | Python EDA in Google Colab                    | Nothing         | 15
+      | - Dataset overview                            |                 |
+      | - Data cleaning (if needed)                   |                 |
+      | - Univariate analysis (4+ variables)          |                 |
+      | - Bivariate analysis (4+ relationships)       |                 |
+      | - Markdown insights after each section        |                 |
+2     | Design Tableau dashboard                      | EDA complete    | 30
+      | - STEAM field major graduation rate KPI       |                 |
+      | - STEAM field post-college job rate KPI       |                 |
+3     | Build Events CRUD pages                       | DB deployed     | 11
+3     | Add filters (event type, demographics)        | Dashboard       | 5
+4     | Create 2+ presentation charts                 | EDA insights    | 40
+5     | Record IS 415 video                           | All 415 tasks   | 5
+
+IS 415 Rubric Breakdown:
+- Python EDA (professional, with insights): 15 pts
+- Video explaining EDA influence: 5 pts
+- Chart Design & Visual Storytelling (2+ charts): 30 pts
+- Charts convey clear insight: 10 pts
+- Dashboard charts (clear, accurate, well-designed): 20 pts
+- Overall dashboard design: 10 pts
+- Filter by event type & demographics: 5 pts
+- Dashboard embedded in website: 5 pts
+
+--------------------------------------------------------------------------------
+PERSON C - WEB APP LEAD (IS 403)
+--------------------------------------------------------------------------------
+Phase | Task                                          | Depends On      | Points
+------|-----------------------------------------------|-----------------|-------
+1     | Set up Express/EJS/Knex project structure     | Nothing         | -
+1     | Build landing page                            | Nothing         | 9
+      | - Ella Rises intro/objective                  |                 |
+      | - Link to donations                           |                 |
+2     | Build auth system                             | Nothing         | 2
+      | - Login (manager vs common user)              |                 |
+      | - Role-based navigation                       |                 |
+3     | Build Surveys CRUD pages                      | DB deployed     | 11
+3     | Build Milestones CRUD                         | DB deployed     | 16
+      | - Milestones setup                            |                 |
+      | - Assign milestones to participants (1:M)     |                 |
+4     | User maintenance pages (manager only)         | Auth            | 11
+4     | Visitor donation page                         | Landing page    | 7
+4     | Polish UI, add code comments                  | All pages       | 3
+5     | Record IS 403 video                           | All 403 tasks   | -
+
+IS 403 Rubric Breakdown:
+External Landing Page:
+- Professionalism: 4 pts
+- Welcome page explaining Ella Rises: 4 pts
+- Link to donations: 1 pt
+- Login (manager or common user): 2 pts
+- Navigation to all sections: 6 pts
+
+Visitor Donations:
+- Professionalism: 4 pts
+- Add user info and donation: 3 pts
+
+User Maintenance:
+- Professionalism: 4 pts
+- Login required: 2 pts
+- Display/navigation/search: 1 pt
+- CRUD (manager only): 4 pts
+
+Participant Maintenance:
+- Professionalism: 5 pts
+- Login required: 2 pts
+- Display/navigation/search: 1 pt
+- CRUD (manager only): 5 pts
+- Maintain milestones for participants: 5 pts
+
+Event Maintenance:
+- Professionalism: 4 pts
+- Login required: 2 pts
+- Display/navigation/search: 1 pt
+- CRUD (manager only): 4 pts
+
+Post Surveys Maintenance:
+- Professionalism: 4 pts
+- Login required: 2 pts
+- Display/navigation/search: 1 pt
+- CRUD (manager only): 4 pts
+
+Milestones Maintenance:
+- Professionalism: 4 pts
+- Login required: 2 pts
+- Display/navigation/search: 1 pt
+- CRUD (manager only): 4 pts
+
+Donations Maintenance:
+- Professionalism: 4 pts
+- Login required: 2 pts
+- Display/navigation/search: 1 pt
+- CRUD (manager only): 4 pts
+
+Other:
+- Group comments (not AI-generated): 3 pts
+
+--------------------------------------------------------------------------------
+PERSON D - INFRASTRUCTURE LEAD (IS 404)
+--------------------------------------------------------------------------------
+Phase | Task                                          | Depends On      | Points
+------|-----------------------------------------------|-----------------|-------
+1     | Create AWS account (personal, NOT Learner Lab)| Nothing         | -
+1     | Set up DNS (is404.net subdomain or own)       | AWS account     | 10
+2     | Deploy AWS RDS (PostgreSQL/MySQL)             | SQL scripts (A) | 20
+2     | Deploy Express app to AWS                     | App skeleton(C) | 25
+      | - Elastic Beanstalk recommended               |                 |
+3     | Build Donations CRUD pages                    | DB deployed     | 11
+3     | Embed Tableau dashboard into site             | Dashboard (B)   | 5
+4     | Configure HTTPS (SSL certificate)             | Deployed app    | 15
+4     | Create HTTP 418 page                          | Deployed app    | 5
+5     | Write README (URL, credentials)               | Everything      | -
+5     | Record IS 404 video                           | All 404 tasks   | -
+
+IS 404 Rubric Breakdown:
+- Web server deployed to Internet: 25 pts
+- Web server deployed appropriately to AWS: 25 pts
+- Database deployed on AWS (appropriate services): 20 pts
+- Custom DNS record (is404.net or own domain): 10 pts
+- Website uses HTTPS: 15 pts
+- HTTP 418 status code on one page: 5 pts
+
+
+================================================================================
+PARALLEL VS SEQUENTIAL TASKS
+================================================================================
+
+WHAT CAN BE DONE IN PARALLEL
+--------------------------------------------------------------------------------
+| Time      | Person A          | Person B         | Person C           | Person D          |
+|-----------|-------------------|------------------|--------------------|--------------------|
+| Days 1-2  | Normalization     | Python EDA       | Express + Landing  | AWS + DNS setup    |
+| Days 3-4  | ERD + SQL scripts | Dashboard design | Auth system        | RDS setup          |
+| Days 5-6  | Participants CRUD | Events CRUD      | Surveys/Milestones | Donations CRUD     |
+| Day 7     | Testing/Polish    | Embed dashboard  | Polish UI          | HTTPS + 418        |
+| Day 8     | IS 402 video      | IS 415 video     | IS 403 video       | IS 404 video + README |
+
+WHAT MUST BE SEQUENTIAL (Critical Path)
+--------------------------------------------------------------------------------
+1. Normalization (A) → ERD (A) → SQL Scripts (A) → RDS Deploy (D)
+                                                       ↓
+2. RDS Deploy (D) ─────────────────────────────→ All CRUD Pages
+                                                       ↓
+3. Tableau Dashboard (B) ──────────────────────→ Embed in Site (D)
+                                                       ↓
+4. All Pages Complete ─────────────────────────→ HTTPS Setup (D)
+                                                       ↓
+5. Everything Complete ────────────────────────→ Videos + Presentation
+
+
+================================================================================
+CRITICAL PATH WARNING
+================================================================================
+
+** THE #1 BOTTLENECK IS DATABASE NORMALIZATION **
+
+- Person A should prioritize getting to 3NF ASAP
+- Share schema with team IMMEDIATELY so C and D can scaffold
+- Person B can work independently on EDA using raw Excel data
+- Don't let normalization block the entire team!
+
+
+================================================================================
+DELIVERABLES CHECKLIST
+================================================================================
+
+| Item                              | Owner | Due         | Status |
+|-----------------------------------|-------|-------------|--------|
+| Zip file (Team#-Group#-v#.zip)    | D     | Fri 11am    | [ ]    |
+| IS 402 video (5 min max)          | A     | Fri 11am    | [ ]    |
+| IS 403 video (5 min max)          | C     | Fri 11am    | [ ]    |
+| IS 404 video (5 min max)          | D     | Fri 11am    | [ ]    |
+| IS 415 video (5 min max)          | B     | Fri 11am    | [ ]    |
+| Source code (zip or GitHub link)  | All   | Fri 11am    | [ ]    |
+| Presentation slides               | All   | Fri 11am    | [ ]    |
+| README (URL, admin credentials)   | D     | Fri 11am    | [ ]    |
+| Normalization spreadsheet         | A     | Fri 11am    | [ ]    |
+| ERD                               | A     | Fri 11am    | [ ]    |
+| SQL Scripts                       | A     | Fri 11am    | [ ]    |
+| AI presentation feedback doc      | A     | Fri 11am    | [ ]    |
+| Google Colab link                 | B     | Fri 11am    | [ ]    |
+| Tableau Public link               | B     | Fri 11am    | [ ]    |
+
+
+================================================================================
+WORKLOAD BALANCE SUMMARY
+================================================================================
+
+Person A (Database Lead):
+- ~85 points IS 402
+- ~18 points IS 403 (Participants CRUD)
+- 1 video (IS 402)
+- Normalization spreadsheet, ERD, SQL scripts, AI feedback doc
+
+Person B (Analytics Lead):
+- ~100 points IS 415
+- ~11 points IS 403 (Events CRUD)
+- 1 video (IS 415)
+- Google Colab notebook, Tableau dashboard, presentation charts
+
+Person C (Web App Lead):
+- ~100 points IS 403
+- 1 video (IS 403)
+- Landing page, auth, surveys, milestones, user maintenance, donations page
+
+Person D (Infrastructure Lead):
+- ~100 points IS 404
+- ~11 points IS 403 (Donations CRUD)
+- 1 video (IS 404)
+- AWS setup, RDS, HTTPS, 418 page, dashboard embed, README
+
+
+================================================================================
+TECH STACK REFERENCE
+================================================================================
+
+Required Packages (IS 403):
+- express
+- ejs
+- knex
+- pg (PostgreSQL) or mysql2 (MySQL)
+- express-session
+- multer
+
+Recommended Packages:
+- bcrypt (password hashing)
+- helmet (security headers)
+- csurf (CSRF protection)
+- connect-flash (flash messages)
+- nodemailer (emails)
+- chart.js (via CDN for charts)
+
+AWS Services (IS 404):
+- Elastic Beanstalk (recommended for app deployment)
+- RDS (managed database)
+- Route 53 or external DNS
+- ACM (SSL certificates for HTTPS)
+
+
+================================================================================
+PRESENTATION TIPS
+================================================================================
+
+- 20 minutes presentation + tech demo
+- 5 minutes Q&A
+- Focus on VALUE to Ella Rises, not implementation details
+- Show data-backed insights about milestone indicators
+- Demonstrate how website helps manage events and survey data
+- Get AI feedback on presentation before submitting (IS 402 requirement)
+
+
+================================================================================
+CONTACT / QUESTIONS
+================================================================================
+
+- Use INTEX Slack workspace (public channels only)
+- Professors answer admin/project questions only
+- Do NOT ask TAs - they are not available as a resource
+- AI tools encouraged for all tasks
