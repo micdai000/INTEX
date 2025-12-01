@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Ella Rises Brand Colors - Warm & Empowering */
+    --background: 10 40% 97%;
+    --foreground: 0 0% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
+
+    /* Primary: Coral/Rose - Main brand color */
+    --primary: 5 65% 70%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary: Soft Peach */
+    --secondary: 15 70% 88%;
+    --secondary-foreground: 0 0% 15%;
+
+    /* Muted: Light warm gray */
+    --muted: 20 25% 92%;
+    --muted-foreground: 0 0% 40%;
+
+    /* Accent: Warm Pink */
+    --accent: 350 75% 75%;
+    --accent-foreground: 0 0% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 20 20% 88%;
+    --input: 20 20% 88%;
+    --ring: 5 65% 70%;
+
+    --radius: 0.75rem;
+
+    /* Custom brand colors */
+    --ella-coral: 5 65% 70%;
+    --ella-peach: 15 70% 88%;
+    --ella-cream: 30 50% 95%;
+    --ella-charcoal: 0 0% 20%;
+    --ella-warm-pink: 350 75% 75%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--ella-peach)) 0%, hsl(var(--ella-coral)) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--ella-cream)) 100%);
+    
+    /* Shadows */
+    --shadow-soft: 0 10px 30px -10px hsl(var(--ella-coral) / 0.2);
+    --shadow-card: 0 4px 20px -4px hsl(var(--ella-coral) / 0.15);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 20%;
+    --sidebar-primary: 5 65% 70%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 15 70% 92%;
+    --sidebar-accent-foreground: 0 0% 20%;
+    --sidebar-border: 20 20% 90%;
+    --sidebar-ring: 5 65% 70%;
+  }
+
+  .dark {
+    --background: 0 0% 12%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 15%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 15%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 5 65% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 350 70% 65%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 25%;
+    --input: 0 0% 25%;
+    --ring: 5 65% 65%;
+    
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 5 65% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 18%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 5 65% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
