@@ -1,0 +1,15 @@
+<!-- Error Page -->
+<section class="py-20">
+  <div class="container px-4 md:px-6">
+    <div class="max-w-md mx-auto text-center">
+      <div class="text-6xl font-serif text-ella-coral mb-4">Oops!</div>
+      <h1 class="text-2xl font-serif mb-4">Something Went Wrong</h1>
+      <p class="mb-8" style="color: var(--ella-charcoal); opacity: 0.7;">
+        <%= typeof message !== 'undefined' ? message : 'An unexpected error occurred.' %>
+      </p>
+      <a href="/" class="btn-primary">
+        Go Back Home
+      </a>
+    </div>
+  </div>
+</section>

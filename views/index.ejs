@@ -1,101 +1,260 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MTC Dashboard</title>
+<!-- Landing Page - Immersive Design with Integrated Images -->
 
-    <style>
-        body {
-            background-image: url("/flags.jpeg");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
+<!-- Hero Section with Background Image -->
+<section class="hero-immersive">
+  <div class="hero-bg-container">
+    <img src="/images/ella/hero1.jpg" alt="" class="hero-bg-image">
+    <div class="hero-bg-overlay"></div>
+  </div>
+  <div class="container">
+    <div class="hero-immersive-content">
+      <h1 class="hero-immersive-title">
+        Inviting Young Women to
+        <span class="highlight">Pursue Higher Education</span>
+      </h1>
 
-            height: 100vh;
-            margin: 0;
-            padding: 0;
+      <p class="hero-immersive-subtitle">
+        Empowering women through mentoring, creative workshops, and leadership
+        opportunities that build both technical competence and artistic confidence.
+      </p>
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+      <!-- CTA Box -->
+      <div class="hero-cta-box">
+        <div class="cta-input-group">
+          <svg class="cta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+          </svg>
+          <span class="cta-label">Support Us</span>
+          <span class="cta-divider">|</span>
+          <a href="/donations/new" class="cta-link">Make a donation today</a>
+        </div>
+        <a href="/donations/new" class="btn-pill btn-pill-primary btn-pill-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-            font-family: Arial, sans-serif;
-        }
+<!-- Impact Stats Section -->
+<section class="section impact-section">
+  <div class="container">
+    <div class="impact-grid">
+      <div class="impact-item">
+        <span class="impact-number">500+</span>
+        <span class="impact-label">Young Women Served</span>
+      </div>
+      <div class="impact-item">
+        <span class="impact-number">50+</span>
+        <span class="impact-label">Workshops Held</span>
+      </div>
+      <div class="impact-item">
+        <span class="impact-number">100+</span>
+        <span class="impact-label">Mentors Connected</span>
+      </div>
+      <div class="impact-item">
+        <span class="impact-number">95%</span>
+        <span class="impact-label">Program Completion</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-        .welcome-card {
-            max-width: 600px;
-            width: 90%;
+<!-- What We Do - Image Cards Section -->
+<section class="section" style="background: var(--ella-cream-dark);">
+  <div class="container">
+    <h2 class="section-title">What We Do</h2>
+    <p class="section-subtitle">
+      We provide comprehensive support to help young women thrive in education and beyond.
+    </p>
 
-            /* translucent card like your login page */
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(4px);
-
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            text-align: center;
-        }
-
-        h1 {
-            margin: 0;
-            color: navy;
-            font-weight: bold;
-        }
-
-        h2 {
-            margin: 0;
-            color: navy;
-            font-weight: bold;
-        }
-
-        p {
-            color: navy;
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .btn {
-            text-decoration: none;
-            display: inline-block;
-            padding: 0.7rem 1.4rem;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 0.3rem;
-        }
-
-        .btn-primary {
-            background-color: navy;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #001a66;
-        }
-
-        .btn-danger {
-            background-color: #cc0000;
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background-color: #990000;
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="welcome-card">
-        <h1>Welcome to the INTEX Dashboard!</h1>
-        <h2>We Ready!!! uh huh uh huh</h2>
+    <!-- Image Card 1 - Mentorship (talking to girls image) -->
+    <div class="image-content-card">
+      <div class="image-content-visual">
+        <img src="/images/ella/talkingtogirls.jpg.avif" alt="Mentor talking with participants">
+      </div>
+      <div class="image-content-text">
+        <div class="image-content-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m9 5.197v1"/>
+          </svg>
+        </div>
+        <h3>Mentorship Programs</h3>
+        <p>Connect with experienced mentors who guide participants through their educational journey and career development. Our mentors provide one-on-one support, helping young women navigate challenges and discover their potential.</p>
+        <a href="/about" class="image-content-link">
+          Learn more
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+      </div>
     </div>
 
-</body>
-</html>
+    <!-- Image Card 2 - Workshops (reversed) -->
+    <div class="image-content-card image-content-card-reverse">
+      <div class="image-content-visual">
+        <img src="/images/ella/event3.jpg" alt="Workshop event">
+      </div>
+      <div class="image-content-text">
+        <div class="image-content-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h3>Workshops & Events</h3>
+        <p>Participate in hands-on workshops covering STEAM topics, leadership skills, and creative expression. From coding bootcamps to art sessions, we offer diverse programming that sparks curiosity and builds confidence.</p>
+        <a href="/about" class="image-content-link">
+          Learn more
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Image Card 3 - Milestones (group of girls) -->
+    <div class="image-content-card">
+      <div class="image-content-visual image-content-visual-cover">
+        <img src="/images/ella/groupofgirls.jpg.avif" alt="Group of participants celebrating" style="object-position: 80% center;">
+      </div>
+      <div class="image-content-text">
+        <div class="image-content-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+          </svg>
+        </div>
+        <h3>Track Milestones</h3>
+        <p>Celebrate achievements and track progress as participants reach important educational and personal goals. We recognize every step forward, from completing workshops to graduating with honors.</p>
+        <a href="/about" class="image-content-link">
+          Learn more
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Upcoming Event Countdown Section -->
+<% if (nextEvent) { %>
+<section class="section countdown-section">
+  <div class="container">
+    <div class="countdown-card">
+      <div class="countdown-header">
+        <span class="countdown-label">Next Event</span>
+        <h2 class="countdown-event-name"><%= nextEvent.event_name %></h2>
+        <p class="countdown-event-details">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 1.25rem; height: 1.25rem; vertical-align: middle;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          <%= new Date(nextEvent.event_datetime_start).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) %>
+          <% if (nextEvent.event_location) { %>
+            &nbsp;&bull;&nbsp;
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 1.25rem; height: 1.25rem; vertical-align: middle;">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <%= nextEvent.event_location %>
+          <% } %>
+        </p>
+      </div>
+      <div class="countdown-timer" data-date="<%= new Date(nextEvent.event_datetime_start).toISOString() %>">
+        <div class="countdown-unit">
+          <span class="countdown-number" id="countdown-days">--</span>
+          <span class="countdown-unit-label">Days</span>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-number" id="countdown-hours">--</span>
+          <span class="countdown-unit-label">Hours</span>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-number" id="countdown-minutes">--</span>
+          <span class="countdown-unit-label">Minutes</span>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-number" id="countdown-seconds">--</span>
+          <span class="countdown-unit-label">Seconds</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  const timer = document.querySelector('.countdown-timer');
+  if (!timer) return;
+
+  const targetDate = new Date(timer.dataset.date).getTime();
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+
+    if (diff < 0) {
+      document.getElementById('countdown-days').textContent = '0';
+      document.getElementById('countdown-hours').textContent = '0';
+      document.getElementById('countdown-minutes').textContent = '0';
+      document.getElementById('countdown-seconds').textContent = '0';
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById('countdown-days').textContent = days;
+    document.getElementById('countdown-hours').textContent = hours;
+    document.getElementById('countdown-minutes').textContent = minutes;
+    document.getElementById('countdown-seconds').textContent = seconds;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+})();
+</script>
+<% } %>
+
+<!-- Mission Section with Full-Width Image -->
+<section class="mission-banner">
+  <div class="mission-banner-bg">
+    <img src="/images/ella/girlholdingart.jpg.avif" alt="" style="object-position: center 85%;">
+    <div class="mission-banner-overlay"></div>
+  </div>
+  <div class="container">
+    <div class="mission-banner-content">
+      <h2>Our Mission</h2>
+      <p>
+        Ella Rises empowers the rising generation of women to pursue higher education
+        and embrace their heritage through mentoring, creative workshops, and leadership
+        opportunities that build both technical competence and artistic confidence.
+      </p>
+      <a href="/donations/new" class="btn-pill btn-pill-primary" style="padding: 1rem 2rem;">
+        Support Our Work
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Donors Section -->
+<section class="donors-section">
+  <div class="container">
+    <h2 class="donors-title">Our Generous Supporters</h2>
+    <p class="donors-subtitle">We're grateful for the organizations that help make our mission possible.</p>
+    <div class="donors-logos">
+      <div class="donor-logo donor-logo-tall">
+        <img src="/images/ella/creativelearning.png.avif" alt="Creative Learning">
+      </div>
+      <div class="donor-logo donor-logo-tall">
+        <img src="/images/ella/thanksgivingpoint.png.avif" alt="Thanksgiving Point">
+      </div>
+      <div class="donor-logo donor-logo-wide">
+        <img src="/images/ella/meta-logo.png" alt="Meta">
+      </div>
+    </div>
+  </div>
+</section>

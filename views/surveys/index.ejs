@@ -1,0 +1,66 @@
+<!-- Surveys List -->
+<section class="py-8">
+  <div class="container px-4 md:px-6">
+    <div class="page-header">
+      <h1 class="page-title">Surveys</h1>
+      <% if (isManager) { %>
+        <a href="/surveys/create/new" class="btn-primary">Add Survey</a>
+      <% } %>
+    </div>
+
+    <form method="GET" action="/surveys" class="search-form">
+      <input type="text" name="search" value="<%= search %>" placeholder="Search by name or event..." class="search-input">
+      <button type="submit" class="btn-secondary">Search</button>
+      <% if (search) { %><a href="/surveys" class="btn-secondary">Clear</a><% } %>
+    </form>
+
+    <div class="table-container">
+      <% if (surveys.length > 0) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>Participant</th>
+              <th>Event</th>
+              <th>Date</th>
+              <th>Overall Score</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% surveys.forEach(s => { %>
+              <tr>
+                <td class="font-medium"><%= s.first_name %> <%= s.last_name %></td>
+                <td><%= s.event_name %></td>
+                <td><%= s.survey_submission_date ? new Date(s.survey_submission_date).toLocaleDateString() : '-' %></td>
+                <td>
+                  <% if (s.survey_overall_score) { %>
+                    <span class="badge <%= parseFloat(s.survey_overall_score) >= 4 ? 'badge-success' : 'badge-warning' %>">
+                      <%= parseFloat(s.survey_overall_score).toFixed(1) %>/5
+                    </span>
+                  <% } else { %>
+                    -
+                  <% } %>
+                </td>
+                <td>
+                  <div class="actions">
+                    <a href="/surveys/<%= s.person_id %>/<%= s.event_occurrence_id %>" class="btn-secondary btn-sm">View</a>
+                    <% if (isManager) { %>
+                      <a href="/surveys/<%= s.person_id %>/<%= s.event_occurrence_id %>/edit" class="btn-secondary btn-sm">Edit</a>
+                    <% } %>
+                  </div>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <div class="empty-state">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+          </svg>
+          <p>No surveys found.</p>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</section>

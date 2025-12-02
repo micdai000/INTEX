@@ -1,0 +1,84 @@
+<!-- Event Details -->
+<section class="py-8">
+  <div class="container px-4 md:px-6">
+    <div class="mb-6">
+      <a href="/events" class="text-sm text-ella-coral hover:underline">&larr; Back to Events</a>
+    </div>
+
+    <div class="card mb-6">
+      <div class="card-header flex justify-between items-center">
+        <h1 class="text-2xl font-serif"><%= event.event_name %></h1>
+        <% if (isManager) { %>
+          <div class="actions">
+            <a href="/events/<%= event.event_id %>/edit" class="btn-secondary btn-sm">Edit</a>
+            <form method="POST" action="/events/<%= event.event_id %>/delete" class="inline" onsubmit="return confirm('Delete this event and all its occurrences?')">
+              <button type="submit" class="btn-danger btn-sm">Delete</button>
+            </form>
+          </div>
+        <% } %>
+      </div>
+      <div class="card-body">
+        <div class="grid md:grid-cols-2 gap-4 mb-4">
+          <div>
+            <p class="text-sm text-gray-500">Event Type</p>
+            <p class="font-medium"><%= event.event_type || '-' %></p>
+          </div>
+          <div>
+            <p class="text-sm text-gray-500">Recurrence</p>
+            <p class="font-medium"><%= event.event_recurrence_pattern || 'One-time' %></p>
+          </div>
+          <div>
+            <p class="text-sm text-gray-500">Default Capacity</p>
+            <p class="font-medium"><%= event.event_default_capacity || 'No limit' %></p>
+          </div>
+        </div>
+        <% if (event.event_description) { %>
+          <div>
+            <p class="text-sm text-gray-500 mb-2">Description</p>
+            <p><%= event.event_description %></p>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- Event Occurrences -->
+    <div class="card">
+      <div class="card-header">
+        <h2 class="text-lg font-serif">Event Occurrences</h2>
+      </div>
+      <div class="card-body p-0">
+        <% if (occurrences.length > 0) { %>
+          <table>
+            <thead>
+              <tr>
+                <th>Date & Time</th>
+                <th>Location</th>
+                <th>Capacity</th>
+                <th>Registrations</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% occurrences.forEach(o => { %>
+                <tr>
+                  <td>
+                    <%= o.event_datetime_start ? new Date(o.event_datetime_start).toLocaleString() : '-' %>
+                    <% if (o.event_datetime_end) { %>
+                      <br><span class="text-sm text-gray-500">to <%= new Date(o.event_datetime_end).toLocaleTimeString() %></span>
+                    <% } %>
+                  </td>
+                  <td><%= o.event_location || '-' %></td>
+                  <td><%= o.event_capacity || 'No limit' %></td>
+                  <td><%= o.registration_count %></td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        <% } else { %>
+          <div class="empty-state">
+            <p>No occurrences scheduled.</p>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</section>

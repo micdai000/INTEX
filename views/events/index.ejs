@@ -1,0 +1,60 @@
+<!-- Events List -->
+<section class="py-8">
+  <div class="container px-4 md:px-6">
+    <div class="page-header">
+      <h1 class="page-title">Events</h1>
+      <% if (isManager) { %>
+        <a href="/events/create/new" class="btn-primary">Add Event</a>
+      <% } %>
+    </div>
+
+    <form method="GET" action="/events" class="search-form">
+      <input type="text" name="search" value="<%= search %>" placeholder="Search events..." class="search-input">
+      <button type="submit" class="btn-secondary">Search</button>
+      <% if (search) { %><a href="/events" class="btn-secondary">Clear</a><% } %>
+    </form>
+
+    <div class="table-container">
+      <% if (events.length > 0) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>Event Name</th>
+              <th>Type</th>
+              <th>Recurrence</th>
+              <th>Capacity</th>
+              <th>Occurrences</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% events.forEach(e => { %>
+              <tr>
+                <td class="font-medium"><%= e.event_name %></td>
+                <td><span class="badge badge-primary"><%= e.event_type || '-' %></span></td>
+                <td><%= e.event_recurrence_pattern || 'One-time' %></td>
+                <td><%= e.event_default_capacity || '-' %></td>
+                <td><%= e.occurrence_count %></td>
+                <td>
+                  <div class="actions">
+                    <a href="/events/<%= e.event_id %>" class="btn-secondary btn-sm">View</a>
+                    <% if (isManager) { %>
+                      <a href="/events/<%= e.event_id %>/edit" class="btn-secondary btn-sm">Edit</a>
+                    <% } %>
+                  </div>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <div class="empty-state">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          <p>No events found.</p>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,18 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="flex flex-col items-center gap-4">
+      <div class="flex items-center gap-3">
+        <img src="/images/mainlogo.avif" alt="Ella Rises" style="width: 36px; height: auto;">
+        <span style="font-family: 'DM Serif Display', serif; font-size: 1.125rem; color: white;">Ella Rises</span>
+      </div>
+      <div class="flex gap-6 text-sm">
+        <a href="/about">About</a>
+        <a href="/donations/new">Donate</a>
+        <% if (!isAuthenticated) { %>
+          <a href="/auth/login">Staff Login</a>
+        <% } %>
+      </div>
+      <p style="font-size: 0.8125rem; opacity: 0.6;">&copy; 2025 Ella Rises. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
