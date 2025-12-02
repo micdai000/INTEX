@@ -1,0 +1,82 @@
+<!-- Public Donation Form - Beautiful Design -->
+<section class="section" style="background: linear-gradient(180deg, var(--ella-blush-light) 0%, var(--ella-cream) 100%); min-height: 100vh; padding-top: 7rem;">
+  <div class="container">
+    <div class="max-w-lg mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <div class="hero-badge" style="margin-bottom: 1.5rem;">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+          </svg>
+          <span>Make a Difference</span>
+        </div>
+        <h1 style="font-family: 'DM Serif Display', serif; font-size: 2.5rem; margin-bottom: 1rem;">Support Ella Rises</h1>
+        <p style="color: var(--ella-charcoal-light); font-size: 1.0625rem; max-width: 400px; margin: 0 auto;">
+          Your donation helps us empower young women through mentoring, workshops, and leadership programs.
+        </p>
+      </div>
+
+      <!-- Donation Card -->
+      <div class="card" style="box-shadow: var(--shadow-xl);">
+        <div class="card-body" style="padding: 2rem;">
+          <form method="POST" action="/donations/public">
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="form-group">
+                <label for="first_name" class="form-label">First Name *</label>
+                <input type="text" id="first_name" name="first_name" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label for="last_name" class="form-label">Last Name *</label>
+                <input type="text" id="last_name" name="last_name" class="form-input" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label">Email Address *</label>
+              <input type="email" id="email" name="email" class="form-input" required placeholder="you@example.com">
+            </div>
+
+            <div class="form-group">
+              <label for="phone" class="form-label">Phone (Optional)</label>
+              <input type="tel" id="phone" name="phone" class="form-input" placeholder="(555) 123-4567">
+            </div>
+
+            <div class="form-group">
+              <label for="donation_amount" class="form-label">Donation Amount *</label>
+              <div style="position: relative;">
+                <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--ella-gray);">$</span>
+                <input type="number" id="donation_amount" name="donation_amount" class="form-input" style="padding-left: 2rem;" min="1" step="0.01" required placeholder="0.00">
+              </div>
+            </div>
+
+            <!-- Quick Amount Buttons -->
+            <div class="flex flex-wrap gap-2 mb-6">
+              <button type="button" onclick="setAmount(25)" class="btn-secondary btn-sm">$25</button>
+              <button type="button" onclick="setAmount(50)" class="btn-secondary btn-sm">$50</button>
+              <button type="button" onclick="setAmount(100)" class="btn-secondary btn-sm">$100</button>
+              <button type="button" onclick="setAmount(250)" class="btn-secondary btn-sm">$250</button>
+              <button type="button" onclick="setAmount(500)" class="btn-secondary btn-sm">$500</button>
+            </div>
+
+            <button type="submit" class="btn-primary w-full btn-lg">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+              </svg>
+              Donate Now
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <p class="text-center mt-6" style="font-size: 0.8125rem; color: var(--ella-gray);">
+        Ella Rises is a 501(c)(3) nonprofit organization. All donations are tax-deductible.
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+function setAmount(amount) {
+  document.getElementById('donation_amount').value = amount;
+}
+</script>

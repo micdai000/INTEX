@@ -1,0 +1,64 @@
+<!-- Participants List -->
+<section class="py-8 page-section">
+  <div class="container px-4 md:px-6">
+    <div class="page-header">
+      <h1 class="page-title">Participants</h1>
+      <% if (isManager) { %>
+        <a href="/participants/create/new" class="btn-primary">Add Participant</a>
+      <% } %>
+    </div>
+
+    <!-- Search -->
+    <form method="GET" action="/participants" class="search-form">
+      <input type="text" name="search" value="<%= search %>" placeholder="Search participants..." class="search-input">
+      <button type="submit" class="btn-secondary">Search</button>
+      <% if (search) { %>
+        <a href="/participants" class="btn-secondary">Clear</a>
+      <% } %>
+    </form>
+
+    <!-- Table -->
+    <div class="table-container">
+      <% if (participants.length > 0) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Location</th>
+              <th>Interest</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% participants.forEach(p => { %>
+              <tr>
+                <td class="font-medium"><%= p.first_name %> <%= p.last_name %></td>
+                <td><%= p.email %></td>
+                <td><%= p.phone || '-' %></td>
+                <td><%= p.city ? `${p.city}, ${p.state}` : '-' %></td>
+                <td><span class="badge badge-primary"><%= p.field_of_interest || '-' %></span></td>
+                <td>
+                  <div class="actions">
+                    <a href="/participants/<%= p.person_id %>" class="btn-secondary btn-sm">View</a>
+                    <% if (isManager) { %>
+                      <a href="/participants/<%= p.person_id %>/edit" class="btn-secondary btn-sm">Edit</a>
+                    <% } %>
+                  </div>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <div class="empty-state">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m9 5.197v1"/>
+          </svg>
+          <p>No participants found.</p>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</section>

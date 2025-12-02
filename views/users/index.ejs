@@ -1,0 +1,62 @@
+<!-- Users List (Manager Only) -->
+<section class="py-8">
+  <div class="container px-4 md:px-6">
+    <div class="page-header">
+      <h1 class="page-title">User Management</h1>
+      <a href="/users/create/new" class="btn-primary">Add User</a>
+    </div>
+
+    <form method="GET" action="/users" class="search-form">
+      <input type="text" name="search" value="<%= search %>" placeholder="Search users..." class="search-input">
+      <button type="submit" class="btn-secondary">Search</button>
+      <% if (search) { %><a href="/users" class="btn-secondary">Clear</a><% } %>
+    </form>
+
+    <div class="table-container">
+      <% if (users.length > 0) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Created</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach(u => { %>
+              <tr>
+                <td class="font-medium"><%= u.first_name %> <%= u.last_name %></td>
+                <td><%= u.email %></td>
+                <td>
+                  <span class="badge <%= u.role === 'manager' ? 'badge-success' : 'badge-primary' %>">
+                    <%= u.role %>
+                  </span>
+                </td>
+                <td><%= u.created_at ? new Date(u.created_at).toLocaleDateString() : '-' %></td>
+                <td>
+                  <div class="actions">
+                    <a href="/users/<%= u.user_id %>/edit" class="btn-secondary btn-sm">Edit</a>
+                    <% if (u.user_id !== user.id) { %>
+                      <form method="POST" action="/users/<%= u.user_id %>/delete" class="inline" onsubmit="return confirm('Delete this user?')">
+                        <button type="submit" class="btn-danger btn-sm">Delete</button>
+                      </form>
+                    <% } %>
+                  </div>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <div class="empty-state">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <p>No users found.</p>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</section>

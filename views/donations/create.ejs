@@ -1,0 +1,47 @@
+<!-- Create Donation (Manager) -->
+<section class="py-8">
+  <div class="container px-4 md:px-6">
+    <div class="mb-6">
+      <a href="/donations" class="text-sm text-ella-coral hover:underline">&larr; Back to Donations</a>
+    </div>
+
+    <div class="max-w-lg mx-auto">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="text-2xl font-serif">Record Donation</h1>
+        </div>
+        <div class="card-body">
+          <form method="POST" action="/donations">
+            <div class="form-group">
+              <label for="person_id" class="form-label">Donor *</label>
+              <select id="person_id" name="person_id" class="form-select" required>
+                <option value="">Select donor...</option>
+                <% persons.forEach(p => { %>
+                  <option value="<%= p.person_id %>"><%= p.first_name %> <%= p.last_name %> (<%= p.email %>)</option>
+                <% }); %>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="donation_amount" class="form-label">Amount *</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+                <input type="number" id="donation_amount" name="donation_amount" class="form-input" style="padding-left: 1.75rem;" min="0.01" step="0.01" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="donation_date" class="form-label">Date *</label>
+              <input type="date" id="donation_date" name="donation_date" class="form-input" required>
+            </div>
+
+            <div class="flex gap-4 mt-6">
+              <button type="submit" class="btn-primary">Record Donation</button>
+              <a href="/donations" class="btn-secondary">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,64 @@
+<!-- Create Event -->
+<section class="py-8">
+  <div class="container px-4 md:px-6">
+    <div class="mb-6">
+      <a href="/events" class="text-sm text-ella-coral hover:underline">&larr; Back to Events</a>
+    </div>
+
+    <div class="max-w-2xl mx-auto">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="text-2xl font-serif">Add Event</h1>
+        </div>
+        <div class="card-body">
+          <form method="POST" action="/events">
+            <div class="form-group">
+              <label for="event_name" class="form-label">Event Name *</label>
+              <input type="text" id="event_name" name="event_name" class="form-input" required>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="form-group">
+                <label for="event_type" class="form-label">Event Type</label>
+                <select id="event_type" name="event_type" class="form-select">
+                  <option value="">Select...</option>
+                  <option value="Workshop">Workshop</option>
+                  <option value="Mentoring">Mentoring</option>
+                  <option value="Cultural">Cultural</option>
+                  <option value="STEAM">STEAM</option>
+                  <option value="Leadership">Leadership</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="event_recurrence_pattern" class="form-label">Recurrence</label>
+                <select id="event_recurrence_pattern" name="event_recurrence_pattern" class="form-select">
+                  <option value="">One-time</option>
+                  <option value="Weekly">Weekly</option>
+                  <option value="Monthly">Monthly</option>
+                  <option value="Quarterly">Quarterly</option>
+                  <option value="Annual">Annual</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="event_default_capacity" class="form-label">Default Capacity</label>
+              <input type="number" id="event_default_capacity" name="event_default_capacity" class="form-input" min="1">
+            </div>
+
+            <div class="form-group">
+              <label for="event_description" class="form-label">Description</label>
+              <textarea id="event_description" name="event_description" class="form-input" rows="4"></textarea>
+            </div>
+
+            <div class="flex gap-4 mt-6">
+              <button type="submit" class="btn-primary">Add Event</button>
+              <a href="/events" class="btn-secondary">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

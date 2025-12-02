@@ -1,0 +1,62 @@
+<!-- Milestones List -->
+<section class="py-8">
+  <div class="container px-4 md:px-6">
+    <div class="page-header">
+      <h1 class="page-title">Milestones</h1>
+      <% if (isManager) { %>
+        <a href="/milestones/create/new" class="btn-primary">Add Milestone</a>
+      <% } %>
+    </div>
+
+    <form method="GET" action="/milestones" class="search-form">
+      <input type="text" name="search" value="<%= search %>" placeholder="Search milestones..." class="search-input">
+      <button type="submit" class="btn-secondary">Search</button>
+      <% if (search) { %><a href="/milestones" class="btn-secondary">Clear</a><% } %>
+    </form>
+
+    <div class="table-container">
+      <% if (milestones.length > 0) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>Participant</th>
+              <th>Milestone</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% milestones.forEach(m => { %>
+              <tr>
+                <td>
+                  <a href="/participants/<%= m.person_id %>" class="font-medium text-ella-coral hover:underline">
+                    <%= m.first_name %> <%= m.last_name %>
+                  </a>
+                </td>
+                <td><%= m.milestone_title %></td>
+                <td><%= m.milestone_date ? new Date(m.milestone_date).toLocaleDateString() : '-' %></td>
+                <td>
+                  <% if (isManager) { %>
+                    <div class="actions">
+                      <a href="/milestones/<%= m.person_id %>/<%= m.milestone_no %>/edit" class="btn-secondary btn-sm">Edit</a>
+                      <form method="POST" action="/milestones/<%= m.person_id %>/<%= m.milestone_no %>/delete" class="inline" onsubmit="return confirm('Delete milestone?')">
+                        <button type="submit" class="btn-danger btn-sm">Delete</button>
+                      </form>
+                    </div>
+                  <% } %>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <div class="empty-state">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <p>No milestones found.</p>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,78 @@
+<div class="flex min-h-screen flex-col bg-muted/30 items-center justify-center py-12">
+  <div class="container max-w-md px-4">
+    <div class="w-full bg-card border rounded-lg shadow-lg">
+      <div class="p-6 space-y-4">
+        <div>
+          <h2 class="text-2xl font-bold">Create Account</h2>
+          <p class="text-sm text-muted-foreground mt-1">
+            Join the Provo Student Housing Swap community
+          </p>
+        </div>
+
+        <% if (error) { %>
+          <div class="rounded-md bg-destructive/15 p-3 text-sm text-destructive">
+            <%= error %>
+          </div>
+        <% } %>
+
+        <form action="/auth/register" method="POST" class="space-y-4">
+          <div class="space-y-2">
+            <label for="username" class="text-sm font-medium">Username</label>
+            <input
+              id="username"
+              name="username"
+              type="text"
+              placeholder="johndoe"
+              class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+              required
+            />
+          </div>
+
+          <div class="space-y-2">
+            <label for="email" class="text-sm font-medium">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="you@example.com"
+              class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+              required
+            />
+          </div>
+
+          <div class="space-y-2">
+            <label for="password" class="text-sm font-medium">Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="••••••••"
+              class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+              required
+              minlength="6"
+            />
+          </div>
+
+          <div class="space-y-2">
+            <label for="university" class="text-sm font-medium">University</label>
+            <select id="university" name="university" class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" required>
+              <option value="">Select your university</option>
+              <option value="BYU">BYU</option>
+              <option value="UVU">UVU</option>
+            </select>
+          </div>
+
+          <button type="submit" class="w-full inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
+            Create Account
+          </button>
+        </form>
+
+        <div class="text-center text-sm text-muted-foreground">
+          Already have an account? 
+          <a href="/auth/login" class="text-primary hover:underline">Login here</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

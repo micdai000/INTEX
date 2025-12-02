@@ -1,37 +1,35 @@
 {
-  "name": "ella-rises-intex",
+  "name": "provo-crib-connect",
   "version": "1.0.0",
-  "description": "Ella Rises - Empowering Women in STEAM",
+  "description": "Provo Student Housing Swap - BYU & UVU Contracts",
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js",
-    "build:css": "npx tailwindcss -i ./src/input.css -o ./public/css/style.css --watch"
+    "start": "node server.js"
   },
   "keywords": [
-    "ella-rises",
-    "nonprofit",
-    "steam",
-    "women-empowerment"
+    "housing",
+    "student",
+    "byu",
+    "uvu"
   ],
-  "author": "INTEX Team",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "connect-flash": "^0.1.1",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.18.0",
+    "knex": "^3.1.0",
     "pg": "^8.11.5"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.16",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "tailwindcss-animate": "^1.0.7"
   }
 }
