@@ -22,7 +22,7 @@ const knex = require("knex")({
 
 // app is our web server. port is where it listens for requests (like the ‘door’ number).
 const app = express(); // Creates an Express app object. Almost everything (routes, middleware) gets attached to this.
-const port = process.env.PORT || 3000; // Server listening on port 3000
+const port = process.env.PORT || 8081; // Server listening on port 8081
 
 // EJS lets us mix HTML with dynamic data. These lines tell Express to use EJS and where to find our page templates.
 app.set("view engine", "ejs"); // Tells Express: “When we call res.render(...), use EJS files to build the HTML
