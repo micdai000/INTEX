@@ -17,6 +17,8 @@ router.get('/login', isNotAuthenticated, (req, res) => {
 router.post('/login', isNotAuthenticated, async (req, res) => {
   const { email, password } = req.body;
 
+  console.log('Login attempt for email:', email);
+
   try {
     // Find user by email
     const result = await pool.query(
@@ -24,9 +26,12 @@ router.post('/login', isNotAuthenticated, async (req, res) => {
       [email]
     );
 
+    console.log('User found:', result.rows.length > 0);
+
     if (result.rows.length === 0) {
+      console.log('No user found with email:', email);
       req.flash('error', 'Invalid email or password');
-      return res.redirect('/auth/login');
+      return req.session.save(() => res.redirect('/auth/login'));
     }
 
     const user = result.rows[0];
@@ -35,7 +40,7 @@ router.post('/login', isNotAuthenticated, async (req, res) => {
     const validPassword = await bcrypt.compare(password, user.password_hash);
     if (!validPassword) {
       req.flash('error', 'Invalid email or password');
-      return res.redirect('/auth/login');
+      return req.session.save(() => res.redirect('/auth/login'));
     }
 
     // Store user in session
@@ -47,11 +52,17 @@ router.post('/login', isNotAuthenticated, async (req, res) => {
       role: user.role,
     };
 
-    res.redirect('/dashboard');
+    // Save session before redirect to ensure login persists
+    req.session.save((err) => {
+      if (err) {
+        console.error('Session save error:', err);
+      }
+      res.redirect('/dashboard');
+    });
   } catch (err) {
     console.error('Login error:', err);
     req.flash('error', 'An error occurred during login');
-    res.redirect('/auth/login');
+    req.session.save(() => res.redirect('/auth/login'));
   }
 });
 
