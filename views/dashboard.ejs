@@ -17,65 +17,96 @@
 
     <!-- Stats Grid -->
     <div class="stats-grid mb-8">
-      <div class="stat-card">
+      <a href="/participants" class="stat-card stat-card-link">
         <div class="stat-value"><%= stats.participants %></div>
         <div class="stat-label">Participants</div>
-      </div>
-      <div class="stat-card">
+      </a>
+      <a href="/events" class="stat-card stat-card-link">
         <div class="stat-value"><%= stats.events %></div>
         <div class="stat-label">Events</div>
-      </div>
-      <div class="stat-card">
+      </a>
+      <a href="/surveys" class="stat-card stat-card-link">
         <div class="stat-value"><%= stats.registrations %></div>
         <div class="stat-label">Registrations</div>
-      </div>
-      <div class="stat-card">
+      </a>
+      <a href="/donations" class="stat-card stat-card-link">
         <div class="stat-value"><%= stats.donations %></div>
         <div class="stat-label">Donations</div>
-      </div>
+      </a>
     </div>
 
-    <!-- Quick Actions - Compact Button Row -->
-    <div class="quick-actions-row">
-      <a href="/participants" class="quick-action-btn">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="18" height="18">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m9 5.197v1"/>
-        </svg>
-        Participants
-      </a>
-      <a href="/events" class="quick-action-btn">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="18" height="18">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-        </svg>
-        Events
-      </a>
-      <a href="/surveys" class="quick-action-btn">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="18" height="18">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
-        </svg>
-        Surveys
-      </a>
-      <% if (isManager) { %>
-      <a href="/milestones" class="quick-action-btn">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="18" height="18">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-        </svg>
-        Milestones
-      </a>
-      <a href="/donations" class="quick-action-btn">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="18" height="18">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-        </svg>
-        Donations
-      </a>
-      <a href="/users" class="quick-action-btn">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="18" height="18">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-        </svg>
-        Users
-      </a>
-      <% } %>
+    <!-- Tableau Dashboard (no title) -->
+    <div class="tableau-container mb-8">
+      <div class="tableau-scale-wrapper">
+      <div class='tableauPlaceholder' id='viz1764790979903' style='position: relative'>
+        <noscript>
+          <a href='#'>
+            <img alt='Dashboard 2' src='https://public.tableau.com/static/images/IN/INTEX_2025_Group3-3/Dashboard2/1_rss.png' style='border: none' />
+          </a>
+        </noscript>
+        <object class='tableauViz' style='display:none;'>
+          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+          <param name='embed_code_version' value='3' />
+          <param name='site_root' value='' />
+          <param name='name' value='INTEX_2025_Group3-3/Dashboard2' />
+          <param name='tabs' value='no' />
+          <param name='toolbar' value='yes' />
+          <param name='static_image' value='https://public.tableau.com/static/images/IN/INTEX_2025_Group3-3/Dashboard2/1.png' />
+          <param name='animate_transition' value='yes' />
+          <param name='display_static_image' value='yes' />
+          <param name='display_spinner' value='yes' />
+          <param name='display_overlay' value='yes' />
+          <param name='display_count' value='yes' />
+          <param name='language' value='en-US' />
+          <param name='filter' value='publish=yes' />
+        </object>
+      </div>
+      </div>
     </div>
 
   </div>
 </section>
+
+<script type='text/javascript'>
+  var divElement = document.getElementById('viz1764790979903');
+  var vizElement = divElement.getElementsByTagName('object')[0];
+  var wrapper = divElement.parentElement;
+  var container = wrapper.parentElement;
+
+  // Native Tableau dashboard size - full dashboard dimensions
+  var nativeWidth = 1200;
+  var nativeHeight = 1200;
+
+  // Set viz to native size
+  vizElement.style.width = nativeWidth + 'px';
+  vizElement.style.height = nativeHeight + 'px';
+  wrapper.style.width = nativeWidth + 'px';
+  wrapper.style.height = nativeHeight + 'px';
+  wrapper.style.position = 'relative';
+
+  function scaleToFit() {
+    // Get available width minus padding
+    var availableWidth = container.offsetWidth - 48;
+    // Scale based on width - this will scale the whole thing down
+    var scale = Math.min(0.75, availableWidth / nativeWidth);
+
+    // Apply scale transform
+    wrapper.style.transform = 'scale(' + scale + ')';
+    wrapper.style.transformOrigin = 'top left';
+
+    // Center horizontally
+    var scaledWidth = nativeWidth * scale;
+    var marginLeft = Math.max(0, (availableWidth - scaledWidth) / 2);
+    wrapper.style.marginLeft = marginLeft + 'px';
+
+    // Set container height to match scaled size
+    container.style.height = (nativeHeight * scale) + 'px';
+  }
+
+  scaleToFit();
+  window.addEventListener('resize', scaleToFit);
+
+  var scriptElement = document.createElement('script');
+  scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+  vizElement.parentNode.insertBefore(scriptElement, vizElement);
+</script>

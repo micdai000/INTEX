@@ -17,8 +17,25 @@ router.get('/', isAuthenticated, async (req, res) => {
     const params = [];
 
     if (search) {
-      query += ` WHERE LOWER(event_name) LIKE LOWER($1) OR LOWER(event_type) LIKE LOWER($1)`;
-      params.push(`%${search}%`);
+      const searchTerm = search.trim().toLowerCase();
+      const words = searchTerm.split(/\s+/).filter(w => w.length > 0);
+
+      if (words.length > 0) {
+        const searchableText = `
+          LOWER(COALESCE(event_name, '') || ' ' ||
+                COALESCE(event_type, '') || ' ' ||
+                COALESCE(event_description, '') || ' ' ||
+                COALESCE(event_recurrence_pattern, '') || ' ' ||
+                CAST(e.event_id AS TEXT))
+        `;
+
+        const wordConditions = words.map((word, index) => {
+          params.push(`%${word}%`);
+          return `${searchableText} LIKE $${index + 1}`;
+        });
+
+        query += ` WHERE (${wordConditions.join(' AND ')})`;
+      }
     }
 
     query += ' ORDER BY event_name';

@@ -17,11 +17,26 @@ router.get('/', isAuthenticated, async (req, res) => {
     const params = [];
 
     if (search) {
-      query += ` WHERE
-        LOWER(p.first_name) LIKE LOWER($1) OR
-        LOWER(p.last_name) LIKE LOWER($1) OR
-        LOWER(p.email) LIKE LOWER($1)`;
-      params.push(`%${search}%`);
+      const searchTerm = search.trim().toLowerCase();
+      const words = searchTerm.split(/\s+/).filter(w => w.length > 0);
+
+      if (words.length > 0) {
+        const searchableText = `
+          LOWER(COALESCE(p.first_name, '') || ' ' ||
+                COALESCE(p.last_name, '') || ' ' ||
+                COALESCE(p.email, '') || ' ' ||
+                CAST(d.person_id AS TEXT) || ' ' ||
+                CAST(d.donation_id AS TEXT) || ' ' ||
+                CAST(COALESCE(d.donation_amount, 0) AS TEXT))
+        `;
+
+        const wordConditions = words.map((word, index) => {
+          params.push(`%${word}%`);
+          return `${searchableText} LIKE $${index + 1}`;
+        });
+
+        query += ` WHERE (${wordConditions.join(' AND ')})`;
+      }
     }
 
     query += ' ORDER BY d.donation_date DESC';

@@ -1048,7 +1048,7 @@ h1, h2, h3, h4, h5, h6 {
 .image-content-card {
   display: grid;
   gap: 2rem;
-  align-items: center;
+  align-items: stretch;
   background: white;
   border-radius: 2rem;
   overflow: hidden;
@@ -1072,6 +1072,11 @@ h1, h2, h3, h4, h5, h6 {
   .image-content-visual {
     height: 360px;
   }
+
+  .image-content-visual-cover {
+    height: 100%;
+    min-height: 360px;
+  }
 }
 
 .image-content-visual img {
@@ -1087,6 +1092,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .image-content-text {
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @media (min-width: 768px) {
@@ -2230,6 +2238,22 @@ tr:hover td {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
+.stat-card-link {
+  display: block;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.stat-card-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card-link:active {
+  transform: translateY(-2px);
+}
+
 .stat-value {
   font-family: 'DM Serif Display', serif;
   font-size: 2.25rem;
@@ -3173,4 +3197,93 @@ tr:hover td {
   font-size: clamp(1.75rem, 4vw + 0.5rem, 2.5rem);
   color: white;
   letter-spacing: 0.1em;
+}
+
+/* ============================================
+   TABLEAU DASHBOARD EMBED
+   ============================================ */
+
+.tableau-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.tableau-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.tableau-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.5rem, 3vw + 0.5rem, 2rem);
+  color: var(--ella-charcoal);
+  margin: 0 0 0.5rem 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tableau-title svg {
+  color: var(--ella-coral);
+  flex-shrink: 0;
+}
+
+.tableau-subtitle {
+  color: var(--ella-gray);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.tableau-container {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.tableau-container .tableauPlaceholder {
+  margin: 0 auto;
+}
+
+.tableau-scale-wrapper {
+  transform-origin: top left;
+}
+
+/* Mobile adjustments for Tableau */
+@media (max-width: 768px) {
+  .tableau-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+
+  .tableau-container {
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 0 -0.5rem;
+  }
+
+  .tableau-title {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .tableau-title svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tableau-container {
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    margin: 0 -0.75rem;
+  }
+
+  .tableau-subtitle {
+    font-size: 0.875rem;
+  }
 }

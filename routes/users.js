@@ -20,11 +20,25 @@ router.get('/', async (req, res) => {
     const params = [];
 
     if (search) {
-      query += ` WHERE
-        LOWER(first_name) LIKE LOWER($1) OR
-        LOWER(last_name) LIKE LOWER($1) OR
-        LOWER(email) LIKE LOWER($1)`;
-      params.push(`%${search}%`);
+      const searchTerm = search.trim().toLowerCase();
+      const words = searchTerm.split(/\s+/).filter(w => w.length > 0);
+
+      if (words.length > 0) {
+        const searchableText = `
+          LOWER(COALESCE(first_name, '') || ' ' ||
+                COALESCE(last_name, '') || ' ' ||
+                COALESCE(email, '') || ' ' ||
+                COALESCE(role, '') || ' ' ||
+                CAST(user_id AS TEXT))
+        `;
+
+        const wordConditions = words.map((word, index) => {
+          params.push(`%${word}%`);
+          return `${searchableText} LIKE $${index + 1}`;
+        });
+
+        query += ` WHERE (${wordConditions.join(' AND ')})`;
+      }
     }
 
     query += ' ORDER BY last_name, first_name';
