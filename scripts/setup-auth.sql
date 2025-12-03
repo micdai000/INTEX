@@ -15,23 +15,23 @@ CREATE TABLE IF NOT EXISTS app_user (
 -- Create index for faster email lookups
 CREATE INDEX IF NOT EXISTS idx_app_user_email ON app_user(email);
 
--- Insert default manager account
--- Password: 'password' (hashed with bcrypt, 10 rounds)
--- You can generate a new hash using: const bcrypt = require('bcrypt'); bcrypt.hashSync('password', 10);
+-- Insert default admin account
+-- Password: 'pass' (hashed with bcrypt, 10 rounds)
+-- You can generate a new hash using: const bcrypt = require('bcrypt'); bcrypt.hashSync('pass', 10);
 INSERT INTO app_user (email, password_hash, first_name, last_name, role)
 VALUES (
-  'kimballberrett@gmail.com',
-  '$2b$10$rQZ9QxPvn.H8TKj8H0KtOeYIKjB/LZvDMuMcqXzK1RjMvXxJ9XzGu',
-  'Kimball',
-  'Berrett',
+  'admin@test.com',
+  '$2b$10$YourHashHere',
+  'Admin',
+  'User',
   'manager'
 ) ON CONFLICT (email) DO NOTHING;
 
--- Optional: Create a common user for testing
+-- Create a common user for testing
 INSERT INTO app_user (email, password_hash, first_name, last_name, role)
 VALUES (
-  'user@ellarises.org',
-  '$2b$10$rQZ9QxPvn.H8TKj8H0KtOeYIKjB/LZvDMuMcqXzK1RjMvXxJ9XzGu',
+  'user@test.com',
+  '$2b$10$YourHashHere',
   'Test',
   'User',
   'common'

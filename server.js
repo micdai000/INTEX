@@ -21,6 +21,7 @@ import surveysRoutes from './routes/surveys.js';
 import milestonesRoutes from './routes/milestones.js';
 import donationsRoutes from './routes/donations.js';
 import usersRoutes from './routes/users.js';
+import contactRoutes from './routes/contact.js';
 
 // ES module path helpers
 const __filename = fileURLToPath(import.meta.url);
@@ -71,6 +72,20 @@ app.use((req, res, next) => {
   next();
 });
 
+// HTTP 418 - I'm a teapot (required for IS 404)
+app.get('/teapot', (req, res) => {
+  res.status(418).render('teapot', {
+    title: "I'm a Teapot - Ella Rises",
+  });
+});
+
+// Workshops page
+app.get('/workshops', (req, res) => {
+  res.render('workshops', {
+    title: 'Workshops & Events - Ella Rises',
+  });
+});
+
 // Route handlers
 app.use('/', indexRoutes);
 app.use('/auth', authRoutes);
@@ -80,6 +95,7 @@ app.use('/surveys', surveysRoutes);
 app.use('/milestones', milestonesRoutes);
 app.use('/donations', donationsRoutes);
 app.use('/users', usersRoutes);
+app.use('/contact', contactRoutes);
 
 // 404 handler - page not found
 app.use((req, res) => {
