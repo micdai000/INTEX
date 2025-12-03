@@ -158,6 +158,53 @@ router.post('/:id', isManager, async (req, res) => {
   }
 });
 
+// Add milestone to participant
+router.post('/:id/milestones', isManager, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { milestone_title, milestone_date } = req.body;
+
+    // Get the next milestone_no for this person
+    const maxResult = await pool.query(
+      'SELECT COALESCE(MAX(milestone_no), 0) + 1 as next_no FROM milestone WHERE person_id = $1',
+      [id]
+    );
+    const nextNo = maxResult.rows[0].next_no;
+
+    await pool.query(
+      `INSERT INTO milestone (person_id, milestone_no, milestone_title, milestone_date)
+       VALUES ($1, $2, $3, $4)`,
+      [id, nextNo, milestone_title, milestone_date || null]
+    );
+
+    req.flash('success', 'Milestone added successfully');
+    res.redirect(`/participants/${id}`);
+  } catch (err) {
+    console.error('Error adding milestone:', err);
+    req.flash('error', 'Error adding milestone');
+    res.redirect(`/participants/${req.params.id}`);
+  }
+});
+
+// Delete milestone from participant
+router.post('/:id/milestones/:milestoneNo/delete', isManager, async (req, res) => {
+  try {
+    const { id, milestoneNo } = req.params;
+
+    await pool.query(
+      'DELETE FROM milestone WHERE person_id = $1 AND milestone_no = $2',
+      [id, milestoneNo]
+    );
+
+    req.flash('success', 'Milestone deleted successfully');
+    res.redirect(`/participants/${id}`);
+  } catch (err) {
+    console.error('Error deleting milestone:', err);
+    req.flash('error', 'Error deleting milestone');
+    res.redirect(`/participants/${req.params.id}`);
+  }
+});
+
 // Delete participant
 router.post('/:id/delete', isManager, async (req, res) => {
   try {

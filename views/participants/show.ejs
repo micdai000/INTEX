@@ -54,35 +54,55 @@
       <!-- Milestones -->
       <div>
         <div class="card">
-          <div class="card-header flex justify-between items-center">
+          <div class="card-header">
             <h2 class="text-lg font-serif">Milestones</h2>
-            <% if (isManager) { %>
-              <a href="/milestones/create/new?person_id=<%= participant.person_id %>" class="btn-primary btn-sm">Add</a>
-            <% } %>
           </div>
           <div class="card-body">
             <% if (milestones.length > 0) { %>
-              <ul class="space-y-3">
+              <div class="milestone-list">
                 <% milestones.forEach(m => { %>
-                  <li class="flex items-start gap-3 p-3 rounded-lg" style="background: var(--ella-blush); opacity: 0.9;">
-                    <svg class="w-5 h-5 text-ella-coral mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    <div class="flex-1">
-                      <p class="font-medium text-sm"><%= m.milestone_title %></p>
-                      <p class="text-xs text-gray-600"><%= m.milestone_date ? new Date(m.milestone_date).toLocaleDateString() : 'No date' %></p>
+                  <div class="milestone-item">
+                    <div class="milestone-icon">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
+                    </div>
+                    <div class="milestone-content">
+                      <p class="milestone-title"><%= m.milestone_title %></p>
+                      <p class="milestone-date"><%= m.milestone_date ? new Date(m.milestone_date).toLocaleDateString() : 'No date' %></p>
                     </div>
                     <% if (isManager) { %>
-                      <form method="POST" action="/milestones/<%= m.person_id %>/<%= m.milestone_no %>/delete" class="inline">
-                        <input type="hidden" name="return_to_participant" value="true">
-                        <button type="submit" class="text-red-500 hover:text-red-700 text-xs" onclick="return confirm('Delete milestone?')">Remove</button>
+                      <form method="POST" action="/participants/<%= participant.person_id %>/milestones/<%= m.milestone_no %>/delete">
+                        <button type="submit" class="milestone-remove" onclick="return confirm('Delete this milestone?')" aria-label="Delete milestone">
+                          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                          </svg>
+                        </button>
                       </form>
                     <% } %>
-                  </li>
+                  </div>
                 <% }); %>
-              </ul>
+              </div>
             <% } else { %>
-              <p class="text-sm text-gray-500">No milestones yet.</p>
+              <p class="text-sm text-gray-500 mb-4">No milestones yet.</p>
+            <% } %>
+
+            <% if (isManager) { %>
+              <!-- Add Milestone Form -->
+              <div class="milestone-form">
+                <h3 class="milestone-form-title">Add Milestone</h3>
+                <form method="POST" action="/participants/<%= participant.person_id %>/milestones" aria-label="Add milestone form">
+                  <div class="form-group">
+                    <label for="milestone_title" class="form-label">Title</label>
+                    <input type="text" id="milestone_title" name="milestone_title" class="form-input" placeholder="e.g., Graduated High School" required aria-required="true">
+                  </div>
+                  <div class="form-group">
+                    <label for="milestone_date" class="form-label">Date</label>
+                    <input type="date" id="milestone_date" name="milestone_date" class="form-input">
+                  </div>
+                  <button type="submit" class="btn-primary w-full">Add Milestone</button>
+                </form>
+              </div>
             <% } %>
           </div>
         </div>

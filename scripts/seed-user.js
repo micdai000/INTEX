@@ -22,11 +22,11 @@ async function seedUser() {
     console.log('app_user table created/verified');
 
     // Hash the password
-    const password = 'password';
+    const password = 'pass';
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(password, saltRounds);
 
-    // Insert manager user
+    // Insert admin user
     await pool.query(`
       INSERT INTO app_user (email, password_hash, first_name, last_name, role)
       VALUES ($1, $2, $3, $4, $5)
@@ -35,18 +35,18 @@ async function seedUser() {
         first_name = $3,
         last_name = $4,
         role = $5
-    `, ['kimballberrett@gmail.com', passwordHash, 'Kimball', 'Berrett', 'manager']);
+    `, ['admin@test.com', passwordHash, 'Admin', 'User', 'manager']);
 
-    console.log('Manager user created: kimballberrett@gmail.com / password');
+    console.log('Admin user created: admin@test.com / pass');
 
     // Insert test common user
     await pool.query(`
       INSERT INTO app_user (email, password_hash, first_name, last_name, role)
       VALUES ($1, $2, $3, $4, $5)
       ON CONFLICT (email) DO NOTHING
-    `, ['user@ellarises.org', passwordHash, 'Test', 'User', 'common']);
+    `, ['user@test.com', passwordHash, 'Test', 'User', 'common']);
 
-    console.log('Test user created: user@ellarises.org / password');
+    console.log('Test user created: user@test.com / pass');
 
     console.log('\nSetup complete! You can now run: npm run dev');
     process.exit(0);

@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= typeof title !== 'undefined' ? title : 'Ella Rises' %></title>
   <meta name="description" content="Ella Rises empowers women through STEAM education, mentoring, and creative workshops.">
+  <!-- Theme color - forces light toolbar in Safari -->
+  <meta name="theme-color" content="#FFFFFF">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light only">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,11 +22,15 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="min-h-screen flex flex-col bg-ella-cream text-ella-charcoal font-montserrat">
+  <!-- Skip Navigation Link for ADA Compliance -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <%- include('partials/header') %>
 
-  <main class="flex-1">
-    <!-- Flash Messages -->
-    <% if (success && success.length > 0) { %>
+  <main class="flex-1" id="main-content" role="main">
+    <!-- Flash Messages (hidden on auth/contact pages since they show inline) -->
+    <% const isInlinePage = typeof title !== 'undefined' && (title.includes('Login') || title.includes('Sign Up') || title.includes('Contact')); %>
+    <% if (!isInlinePage && success && success.length > 0) { %>
       <div class="flash-message flash-success" role="alert">
         <div class="container">
           <span><%= success %></span>
@@ -27,7 +38,7 @@
         </div>
       </div>
     <% } %>
-    <% if (error && error.length > 0) { %>
+    <% if (!isInlinePage && error && error.length > 0) { %>
       <div class="flash-message flash-error" role="alert">
         <div class="container">
           <span><%= error %></span>
