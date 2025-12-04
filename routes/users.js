@@ -1,4 +1,31 @@
-// Users Routes - CRUD operations for app users (manager only)
+/**
+ * ============================================================================
+ * USERS ROUTES (Manager Only)
+ * ============================================================================
+ *
+ * CRUD operations for managing application user accounts.
+ * All routes require manager authentication.
+ *
+ * User Roles:
+ * - 'manager': Full CRUD access to all data and user management
+ * - 'common': Read-only access (can view but not modify data)
+ *
+ * Security Features:
+ * - Passwords hashed with bcrypt (salt rounds: 10)
+ * - Prevents self-deletion (managers can't delete their own account)
+ * - Email uniqueness enforced by database constraint
+ *
+ * Routes:
+ * - GET  /users              - List all users
+ * - GET  /users/create/new   - Create user form
+ * - POST /users              - Create user
+ * - GET  /users/:id/edit     - Edit user form
+ * - POST /users/:id          - Update user
+ * - POST /users/:id/delete   - Delete user
+ *
+ * ============================================================================
+ */
+
 import express from 'express';
 import bcrypt from 'bcrypt';
 import pool from '../config/database.js';
@@ -6,8 +33,12 @@ import { isManager } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// All user routes require manager access
+// Apply isManager middleware to ALL routes in this file
 router.use(isManager);
+
+// =============================================================================
+// LIST USERS
+// =============================================================================
 
 // List all users with search
 router.get('/', async (req, res) => {

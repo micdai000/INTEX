@@ -1,15 +1,46 @@
-// Index Routes - Landing page and dashboard
+/**
+ * ============================================================================
+ * INDEX ROUTES
+ * ============================================================================
+ *
+ * Handles the main public and authenticated pages:
+ * - Landing page (public)
+ * - Dashboard (authenticated users)
+ * - About page (public)
+ *
+ * The dashboard aggregates statistics from the database and displays
+ * an embedded Tableau visualization for data analytics.
+ *
+ * ============================================================================
+ */
+
 import express from 'express';
 import pool from '../config/database.js';
 import { isAuthenticated } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Landing page - public
+// =============================================================================
+// PUBLIC PAGES
+// =============================================================================
+
+/**
+ * GET /
+ * Landing page - the main public-facing page
+ *
+ * Features:
+ * - Hero section with mission statement
+ * - Event countdown for the next upcoming event
+ * - Information about Ella Rises programs
+ * - Call-to-action for donations and involvement
+ *
+ * Database Query:
+ * Fetches the next upcoming event occurrence to display a countdown timer
+ */
 router.get('/', async (req, res) => {
   try {
-    // Get next upcoming event
-    // Use CURRENT_TIMESTAMP for timezone-aware comparison
+    // Query for the next upcoming event
+    // Uses CURRENT_TIMESTAMP for timezone-aware comparison
     const nextEventResult = await pool.query(`
       SELECT e.event_name, e.event_type, eo.event_datetime_start, eo.event_location
       FROM event_occurrence eo
@@ -31,8 +62,10 @@ router.get('/', async (req, res) => {
       nextEvent: nextEvent
     });
   } catch (err) {
+    // Log error but still render page without event data
     console.error('Error fetching next event:', err.message);
     console.error('Full error:', err);
+
     res.render('index', {
       title: 'Ella Rises - Empowering Women in STEAM',
       nextEvent: null
@@ -40,10 +73,36 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Dashboard - requires authentication
+/**
+ * GET /about
+ * About page - information about Ella Rises organization
+ * Displays mission, team, and organizational information
+ */
+router.get('/about', (req, res) => {
+  res.render('about', {
+    title: 'About - Ella Rises',
+  });
+});
+
+// =============================================================================
+// AUTHENTICATED PAGES
+// =============================================================================
+
+/**
+ * GET /dashboard
+ * Main dashboard for authenticated users
+ *
+ * Features:
+ * - Statistics cards showing counts of participants, events, registrations, donations
+ * - Embedded Tableau dashboard for data visualization
+ * - Quick navigation to data management sections
+ *
+ * Database Queries:
+ * Aggregates counts from multiple tables using parallel queries for performance
+ */
 router.get('/dashboard', isAuthenticated, async (req, res) => {
   try {
-    // Query counts from database
+    // Execute count queries in parallel for better performance
     const [participantsResult, eventsResult, registrationsResult, donationsResult] = await Promise.all([
       pool.query('SELECT COUNT(*) FROM person'),
       pool.query('SELECT COUNT(*) FROM event'),
@@ -51,6 +110,7 @@ router.get('/dashboard', isAuthenticated, async (req, res) => {
       pool.query('SELECT COUNT(*) FROM donation')
     ]);
 
+    // Render dashboard with aggregated statistics
     res.render('dashboard', {
       title: 'Dashboard - Ella Rises',
       stats: {
@@ -62,7 +122,9 @@ router.get('/dashboard', isAuthenticated, async (req, res) => {
     });
   } catch (err) {
     console.error('Dashboard stats error:', err);
-    // Render with zeros if queries fail
+
+    // Render dashboard with zero counts if database queries fail
+    // This ensures the page still loads even with database issues
     res.render('dashboard', {
       title: 'Dashboard - Ella Rises',
       stats: {
@@ -75,20 +137,23 @@ router.get('/dashboard', isAuthenticated, async (req, res) => {
   }
 });
 
-// About page - public
-router.get('/about', (req, res) => {
-  res.render('about', {
-    title: 'About - Ella Rises',
-  });
-});
+// =============================================================================
+// DEBUG ROUTES (Development Only)
+// =============================================================================
 
-// Debug route to check event data (remove in production if needed)
+/**
+ * GET /debug/events
+ * Debug endpoint for troubleshooting event data
+ * Returns JSON with database time and recent events
+ *
+ * Note: Consider removing or protecting this route in production
+ */
 router.get('/debug/events', async (req, res) => {
   try {
-    // Get database time
+    // Get current database time for timezone debugging
     const timeResult = await pool.query('SELECT NOW() as db_time, CURRENT_TIMESTAMP as current_ts');
 
-    // Get all event occurrences
+    // Get recent event occurrences with future/past indicator
     const eventsResult = await pool.query(`
       SELECT e.event_name, eo.event_datetime_start, eo.event_location,
              eo.event_datetime_start > CURRENT_TIMESTAMP as is_future
@@ -98,6 +163,7 @@ router.get('/debug/events', async (req, res) => {
       LIMIT 10
     `);
 
+    // Return debug information as JSON
     res.json({
       server_time: new Date().toISOString(),
       database_time: timeResult.rows[0],

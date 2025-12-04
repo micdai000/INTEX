@@ -88,6 +88,7 @@
 
       <div class="card-body p-0">
         <% if (occurrences.length > 0) { %>
+          <div class="table-scroll-wrapper">
           <table>
             <thead>
               <tr>
@@ -124,6 +125,7 @@
               <% }); %>
             </tbody>
           </table>
+          </div>
         <% } else { %>
           <div class="empty-state">
             <p>No occurrences scheduled.</p>

@@ -1,11 +1,43 @@
-// Surveys Routes - CRUD operations for post-event surveys
+/**
+ * ============================================================================
+ * SURVEYS ROUTES
+ * ============================================================================
+ *
+ * CRUD operations for post-event survey responses.
+ * Surveys measure event effectiveness through satisfaction, usefulness,
+ * instructor quality, and recommendation scores.
+ *
+ * Database Structure:
+ * - Surveys are stored in the registration table
+ * - Survey fields: satisfaction, usefulness, instructor, recommendation scores
+ * - Overall score is calculated as average of individual scores
+ *
+ * Routes:
+ * - GET  /surveys                       - List submitted surveys
+ * - GET  /surveys/:pid/:oid             - View survey details
+ * - GET  /surveys/create/new            - Create form (select registration)
+ * - POST /surveys                       - Submit survey scores
+ * - GET  /surveys/:pid/:oid/edit        - Edit survey form
+ * - POST /surveys/:pid/:oid             - Update survey
+ * - POST /surveys/:pid/:oid/delete      - Clear survey data
+ *
+ * ============================================================================
+ */
+
 import express from 'express';
 import pool from '../config/database.js';
 import { isAuthenticated, isManager } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// List all surveys with search
+// =============================================================================
+// LIST & SEARCH SURVEYS
+// =============================================================================
+
+/**
+ * GET /surveys
+ * Lists all submitted surveys with participant and event information
+ */
 router.get('/', isAuthenticated, async (req, res) => {
   try {
     const { search } = req.query;

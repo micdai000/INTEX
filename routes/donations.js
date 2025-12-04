@@ -1,11 +1,44 @@
-// Donations Routes - CRUD operations and public donation form
+/**
+ * ============================================================================
+ * DONATIONS ROUTES
+ * ============================================================================
+ *
+ * Handles both public donation submissions and manager donation management.
+ *
+ * Public Routes (no authentication):
+ * - GET  /donations/new        - Public donation form
+ * - POST /donations/public     - Process public donation
+ * - GET  /donations/thank-you  - Thank you page
+ *
+ * Authenticated Routes:
+ * - GET  /donations            - List all donations (with totals)
+ * - GET  /donations/create/new - Manager create form
+ * - POST /donations            - Create donation record
+ * - GET  /donations/:id/edit   - Edit form
+ * - POST /donations/:id        - Update donation
+ * - POST /donations/:id/delete - Delete donation
+ *
+ * Database Tables:
+ * - donation: Donation records with amount and date
+ * - person: Donor information (creates new person if email doesn't exist)
+ *
+ * ============================================================================
+ */
+
 import express from 'express';
 import pool from '../config/database.js';
 import { isAuthenticated, isManager } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// List all donations with search (manager view)
+// =============================================================================
+// LIST DONATIONS (AUTHENTICATED)
+// =============================================================================
+
+/**
+ * GET /donations
+ * Lists all donations with donor information and total sum
+ */
 router.get('/', isAuthenticated, async (req, res) => {
   try {
     const { search } = req.query;

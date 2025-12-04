@@ -19,6 +19,7 @@
 
     <div class="table-container">
       <% if (donations.length > 0) { %>
+        <div class="table-scroll-wrapper">
         <table>
           <thead>
             <tr>
@@ -50,6 +51,7 @@
             <% }); %>
           </tbody>
         </table>
+        </div>
       <% } else { %>
         <div class="empty-state">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">

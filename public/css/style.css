@@ -1,7 +1,41 @@
-/* Ella Rises - Modern UI Redesign */
-/* Clean, warm aesthetic inspired by modern landing pages */
+/**
+ * ============================================================================
+ * ELLA RISES - Main Stylesheet
+ * ============================================================================
+ *
+ * Clean, warm aesthetic inspired by modern landing pages with a feminine,
+ * empowering color palette suitable for a women's STEAM organization.
+ *
+ * File Organization:
+ * 1. CSS Custom Properties (Variables)
+ * 2. Reset & Base Styles
+ * 3. Layout Components
+ * 4. Navigation & Header
+ * 5. Hero Sections
+ * 6. Cards & Content
+ * 7. Forms & Inputs
+ * 8. Tables & Data Display
+ * 9. Buttons & Actions
+ * 10. Utilities
+ * 11. Mobile Responsive Styles
+ *
+ * Color Palette:
+ * - Primary: Warm blush tones (#FFD8D1, #FFF0ED)
+ * - Accent: Coral/Maroon (#CE325B, #8B2346)
+ * - Neutrals: Cream (#FFFBF8), Charcoal (#2D2D2D)
+ *
+ * Accessibility:
+ * - Skip link for keyboard navigation
+ * - High contrast text colors
+ * - Focus indicators on interactive elements
+ * - Mobile-responsive design
+ *
+ * ============================================================================
+ */
 
-/* CSS Custom Properties - Refined Color Palette */
+/* =============================================================================
+   1. CSS CUSTOM PROPERTIES (Design Tokens)
+   ============================================================================= */
 :root {
   /* Primary - Warm Blush Tones */
   --ella-blush: #FFD8D1;
@@ -2118,6 +2152,12 @@ textarea.form-input {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
+/* Wrapper for horizontal scrolling on mobile */
+.table-scroll-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -2133,6 +2173,7 @@ th {
   color: var(--ella-charcoal);
   background: var(--ella-blush-light);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  white-space: nowrap;
 }
 
 td {
@@ -2148,6 +2189,42 @@ tr:last-child td {
 
 tr:hover td {
   background: var(--ella-blush-light);
+}
+
+/* Mobile table styles */
+@media (max-width: 768px) {
+  .table-container {
+    border-radius: 1rem;
+    margin: 0 -0.5rem;
+  }
+
+  th {
+    padding: 0.75rem 1rem;
+    font-size: 0.6875rem;
+  }
+
+  td {
+    padding: 0.75rem 1rem;
+    font-size: 0.8125rem;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-container {
+    border-radius: 0.75rem;
+    margin: 0 -0.75rem;
+  }
+
+  th {
+    padding: 0.625rem 0.75rem;
+    font-size: 0.625rem;
+  }
+
+  td {
+    padding: 0.625rem 0.75rem;
+    font-size: 0.75rem;
+  }
 }
 
 /* ============================================

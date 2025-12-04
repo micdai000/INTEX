@@ -1,11 +1,45 @@
-// Events Routes - CRUD operations for events
+/**
+ * ============================================================================
+ * EVENTS ROUTES
+ * ============================================================================
+ *
+ * CRUD operations for managing events and their occurrences.
+ *
+ * Database Structure:
+ * - event: Master event record (name, type, description)
+ * - event_occurrence: Specific instances of events (date, location, capacity)
+ * - registration: Links participants to event occurrences
+ *
+ * Routes:
+ * - GET  /events                    - List all events with search
+ * - GET  /events/:id                - View event with occurrences
+ * - GET  /events/create/new         - Create form (managers only)
+ * - POST /events                    - Create event (managers only)
+ * - GET  /events/:id/edit           - Edit form (managers only)
+ * - POST /events/:id                - Update event (managers only)
+ * - POST /events/:id/delete         - Delete event (managers only)
+ * - POST /events/:id/occurrences    - Add occurrence (managers only)
+ * - GET  /events/:id/occurrences/:oid/edit - Edit occurrence form
+ * - POST /events/:id/occurrences/:oid - Update occurrence
+ * - POST /events/:id/occurrences/:oid/delete - Delete occurrence
+ *
+ * ============================================================================
+ */
+
 import express from 'express';
 import pool from '../config/database.js';
 import { isAuthenticated, isManager } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// List all events with search
+// =============================================================================
+// LIST & SEARCH EVENTS
+// =============================================================================
+
+/**
+ * GET /events
+ * Lists all events with optional fuzzy search and occurrence counts
+ */
 router.get('/', isAuthenticated, async (req, res) => {
   try {
     const { search } = req.query;

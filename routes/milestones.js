@@ -1,11 +1,45 @@
-// Milestones Routes - CRUD operations for participant milestones
+/**
+ * ============================================================================
+ * MILESTONES ROUTES
+ * ============================================================================
+ *
+ * CRUD operations for participant milestone tracking.
+ * Milestones represent achievements like graduation, job placement, etc.
+ *
+ * Key Metrics (from requirements):
+ * - STEAM field major post-secondary graduation rate
+ * - STEAM field post-college job rate
+ *
+ * Database Structure:
+ * - milestone: Tracks participant achievements
+ * - Composite key: person_id + milestone_no
+ * - milestone_no auto-increments per person
+ *
+ * Routes:
+ * - GET  /milestones                    - List all milestones
+ * - GET  /milestones/create/new         - Create form
+ * - POST /milestones                    - Create milestone
+ * - GET  /milestones/:pid/:no/edit      - Edit form
+ * - POST /milestones/:pid/:no           - Update milestone
+ * - POST /milestones/:pid/:no/delete    - Delete milestone
+ *
+ * ============================================================================
+ */
+
 import express from 'express';
 import pool from '../config/database.js';
 import { isAuthenticated, isManager } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// List all milestones with search
+// =============================================================================
+// LIST & SEARCH MILESTONES
+// =============================================================================
+
+/**
+ * GET /milestones
+ * Lists all milestones with participant information
+ */
 router.get('/', isAuthenticated, async (req, res) => {
   try {
     const { search } = req.query;

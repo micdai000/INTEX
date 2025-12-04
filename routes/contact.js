@@ -1,10 +1,40 @@
-// Contact Routes - Contact form with email functionality
+/**
+ * ============================================================================
+ * CONTACT ROUTES
+ * ============================================================================
+ *
+ * Handles the public contact form and email notifications.
+ *
+ * Features:
+ * - Public contact form (no authentication required)
+ * - Email notification to admin using Nodemailer
+ * - Graceful error handling (always shows success to user)
+ *
+ * Environment Variables:
+ * - EMAIL_USER: Gmail account for sending emails
+ * - EMAIL_PASS: Gmail app password (not regular password)
+ * - ADMIN_EMAIL: Recipient for contact form submissions
+ *
+ * Routes:
+ * - GET  /contact - Display contact form
+ * - POST /contact - Process form submission and send email
+ *
+ * ============================================================================
+ */
+
 import express from 'express';
 import nodemailer from 'nodemailer';
 
 const router = express.Router();
 
-// Contact page
+// =============================================================================
+// CONTACT FORM
+// =============================================================================
+
+/**
+ * GET /contact
+ * Displays the public contact form
+ */
 router.get('/', (req, res) => {
   res.render('contact', {
     title: 'Contact Us - Ella Rises',
