@@ -1,0 +1,53 @@
+<!-- Edit Event Occurrence -->
+<section class="py-8">
+  <div class="container px-4 md:px-6">
+    <div class="mb-6">
+      <a href="/events/<%= event.event_id %>" class="text-sm text-ella-coral hover:underline">&larr; Back to <%= event.event_name %></a>
+    </div>
+
+    <div class="card" style="max-width: 600px;">
+      <div class="card-header">
+        <h1 class="text-xl font-serif">Edit Occurrence</h1>
+        <p class="text-sm text-gray-500 mt-1"><%= event.event_name %></p>
+      </div>
+      <div class="card-body">
+        <form method="POST" action="/events/<%= event.event_id %>/occurrences/<%= occurrence.event_occurrence_id %>">
+          <div class="form-group">
+            <label class="form-label" for="event_datetime_start">Start Date & Time *</label>
+            <input type="datetime-local" id="event_datetime_start" name="event_datetime_start" class="form-input" required
+              value="<%= occurrence.event_datetime_start ? new Date(occurrence.event_datetime_start).toISOString().slice(0, 16) : '' %>">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="event_datetime_end">End Date & Time</label>
+            <input type="datetime-local" id="event_datetime_end" name="event_datetime_end" class="form-input"
+              value="<%= occurrence.event_datetime_end ? new Date(occurrence.event_datetime_end).toISOString().slice(0, 16) : '' %>">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="event_location">Location *</label>
+            <input type="text" id="event_location" name="event_location" class="form-input" required
+              value="<%= occurrence.event_location || '' %>" placeholder="e.g., BYU Talmage Building">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="event_capacity">Capacity</label>
+            <input type="number" id="event_capacity" name="event_capacity" class="form-input"
+              value="<%= occurrence.event_capacity || '' %>" placeholder="Leave blank for no limit">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="event_registration_deadline">Registration Deadline</label>
+            <input type="datetime-local" id="event_registration_deadline" name="event_registration_deadline" class="form-input"
+              value="<%= occurrence.event_registration_deadline ? new Date(occurrence.event_registration_deadline).toISOString().slice(0, 16) : '' %>">
+          </div>
+
+          <div class="flex gap-2 mt-6">
+            <button type="submit" class="btn-primary">Save Changes</button>
+            <a href="/events/<%= event.event_id %>" class="btn-secondary">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

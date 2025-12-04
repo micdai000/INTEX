@@ -112,9 +112,12 @@
                   <td><%= o.registration_count %></td>
                   <% if (isManager) { %>
                   <td>
-                    <form method="POST" action="/events/<%= event.event_id %>/occurrences/<%= o.event_occurrence_id %>/delete" class="inline" onsubmit="return confirm('Delete this occurrence? This will also delete all registrations for this occurrence.')">
-                      <button type="submit" class="btn-danger btn-sm">Delete</button>
-                    </form>
+                    <div class="flex gap-2">
+                      <a href="/events/<%= event.event_id %>/occurrences/<%= o.event_occurrence_id %>/edit" class="btn-secondary btn-sm">Edit</a>
+                      <form method="POST" action="/events/<%= event.event_id %>/occurrences/<%= o.event_occurrence_id %>/delete" class="inline" onsubmit="return confirm('Delete this occurrence? This will also delete all registrations for this occurrence.')">
+                        <button type="submit" class="btn-danger btn-sm">Delete</button>
+                      </form>
+                    </div>
                   </td>
                   <% } %>
                 </tr>

@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<%
+  // Pages with hero sections get maroon background, others get cream
+  const isHeroPage = typeof title !== 'undefined' && (
+    title.startsWith('Ella Rises -') ||
+    title.includes('About') ||
+    title.includes('Programs') ||
+    title.includes('Workshops')
+  );
+  const themeColor = isHeroPage ? '#8B2346' : '#FFFBF8';
+%>
+<html lang="en" style="background-color: <%= themeColor %>;">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= typeof title !== 'undefined' ? title : 'Ella Rises' %></title>
   <meta name="description" content="Ella Rises empowers women through STEAM education, mentoring, and creative workshops.">
-  <!-- Theme color - forces light toolbar in Safari -->
-  <meta name="theme-color" content="#FFFFFF">
-  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: dark)">
+  <!-- Theme color - matches page type -->
+  <meta name="theme-color" content="<%= themeColor %>">
+  <meta name="theme-color" content="<%= themeColor %>" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="<%= themeColor %>" media="(prefers-color-scheme: dark)">
   <meta name="color-scheme" content="light only">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">

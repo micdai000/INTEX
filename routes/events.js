@@ -215,6 +215,69 @@ router.post('/:id/occurrences', isManager, async (req, res) => {
   }
 });
 
+// Edit event occurrence form
+router.get('/:eventId/occurrences/:occurrenceId/edit', isManager, async (req, res) => {
+  try {
+    const { eventId, occurrenceId } = req.params;
+
+    const eventResult = await pool.query('SELECT * FROM event WHERE event_id = $1', [eventId]);
+    if (eventResult.rows.length === 0) {
+      req.flash('error', 'Event not found');
+      return res.redirect('/events');
+    }
+
+    const occurrenceResult = await pool.query(
+      'SELECT * FROM event_occurrence WHERE event_occurrence_id = $1',
+      [occurrenceId]
+    );
+
+    if (occurrenceResult.rows.length === 0) {
+      req.flash('error', 'Occurrence not found');
+      return res.redirect(`/events/${eventId}`);
+    }
+
+    res.render('events/edit-occurrence', {
+      title: 'Edit Occurrence - Ella Rises',
+      event: eventResult.rows[0],
+      occurrence: occurrenceResult.rows[0],
+    });
+  } catch (err) {
+    console.error('Error fetching occurrence:', err);
+    req.flash('error', 'Error loading occurrence');
+    res.redirect(`/events/${req.params.eventId}`);
+  }
+});
+
+// Update event occurrence
+router.post('/:eventId/occurrences/:occurrenceId', isManager, async (req, res) => {
+  try {
+    const { eventId, occurrenceId } = req.params;
+    const { event_datetime_start, event_datetime_end, event_location, event_capacity, event_registration_deadline } = req.body;
+
+    await pool.query(
+      `UPDATE event_occurrence SET
+        event_datetime_start = $1, event_datetime_end = $2, event_location = $3,
+        event_capacity = $4, event_registration_deadline = $5
+       WHERE event_occurrence_id = $6`,
+      [
+        event_datetime_start,
+        event_datetime_end || null,
+        event_location,
+        event_capacity || null,
+        event_registration_deadline || null,
+        occurrenceId
+      ]
+    );
+
+    req.flash('success', 'Occurrence updated successfully');
+    res.redirect(`/events/${eventId}`);
+  } catch (err) {
+    console.error('Error updating occurrence:', err);
+    req.flash('error', 'Error updating occurrence');
+    res.redirect(`/events/${eventId}/occurrences/${occurrenceId}/edit`);
+  }
+});
+
 // Delete event occurrence
 router.post('/:eventId/occurrences/:occurrenceId/delete', isManager, async (req, res) => {
   try {
