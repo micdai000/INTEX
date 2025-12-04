@@ -187,4 +187,50 @@ router.post('/:id/delete', isManager, async (req, res) => {
   }
 });
 
+// Create event occurrence
+router.post('/:id/occurrences', isManager, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { event_datetime_start, event_datetime_end, event_location, event_capacity, event_registration_deadline } = req.body;
+
+    await pool.query(
+      `INSERT INTO event_occurrence (event_id, event_datetime_start, event_datetime_end, event_location, event_capacity, event_registration_deadline)
+       VALUES ($1, $2, $3, $4, $5, $6)`,
+      [
+        id,
+        event_datetime_start,
+        event_datetime_end || null,
+        event_location,
+        event_capacity || null,
+        event_registration_deadline || null
+      ]
+    );
+
+    req.flash('success', 'Event occurrence added successfully');
+    res.redirect(`/events/${id}`);
+  } catch (err) {
+    console.error('Error creating event occurrence:', err);
+    req.flash('error', 'Error adding event occurrence');
+    res.redirect(`/events/${id}`);
+  }
+});
+
+// Delete event occurrence
+router.post('/:eventId/occurrences/:occurrenceId/delete', isManager, async (req, res) => {
+  try {
+    const { eventId, occurrenceId } = req.params;
+
+    // Delete registrations first
+    await pool.query('DELETE FROM registration WHERE event_occurrence_id = $1', [occurrenceId]);
+    await pool.query('DELETE FROM event_occurrence WHERE event_occurrence_id = $1', [occurrenceId]);
+
+    req.flash('success', 'Event occurrence deleted successfully');
+    res.redirect(`/events/${eventId}`);
+  } catch (err) {
+    console.error('Error deleting event occurrence:', err);
+    req.flash('error', 'Error deleting event occurrence');
+    res.redirect(`/events/${eventId}`);
+  }
+});
+
 export default router;

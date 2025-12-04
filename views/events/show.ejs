@@ -43,9 +43,49 @@
 
     <!-- Event Occurrences -->
     <div class="card">
-      <div class="card-header">
+      <div class="card-header flex justify-between items-center">
         <h2 class="text-lg font-serif">Event Occurrences</h2>
+        <% if (isManager) { %>
+          <button type="button" class="btn-primary btn-sm" onclick="document.getElementById('addOccurrenceForm').classList.toggle('hidden')">
+            + Add Occurrence
+          </button>
+        <% } %>
       </div>
+
+      <% if (isManager) { %>
+      <!-- Add Occurrence Form -->
+      <div id="addOccurrenceForm" class="hidden card-body border-b">
+        <form method="POST" action="/events/<%= event.event_id %>/occurrences">
+          <div class="grid md:grid-cols-2 gap-4 mb-4">
+            <div class="form-group">
+              <label class="form-label" for="event_datetime_start">Start Date & Time *</label>
+              <input type="datetime-local" id="event_datetime_start" name="event_datetime_start" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="event_datetime_end">End Date & Time</label>
+              <input type="datetime-local" id="event_datetime_end" name="event_datetime_end" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="event_location">Location *</label>
+              <input type="text" id="event_location" name="event_location" class="form-input" required placeholder="e.g., BYU Talmage Building">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="event_capacity">Capacity</label>
+              <input type="number" id="event_capacity" name="event_capacity" class="form-input" value="<%= event.event_default_capacity || '' %>" placeholder="Leave blank for no limit">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="event_registration_deadline">Registration Deadline</label>
+              <input type="datetime-local" id="event_registration_deadline" name="event_registration_deadline" class="form-input">
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button type="submit" class="btn-primary">Add Occurrence</button>
+            <button type="button" class="btn-secondary" onclick="document.getElementById('addOccurrenceForm').classList.add('hidden')">Cancel</button>
+          </div>
+        </form>
+      </div>
+      <% } %>
+
       <div class="card-body p-0">
         <% if (occurrences.length > 0) { %>
           <table>
@@ -55,6 +95,7 @@
                 <th>Location</th>
                 <th>Capacity</th>
                 <th>Registrations</th>
+                <% if (isManager) { %><th>Actions</th><% } %>
               </tr>
             </thead>
             <tbody>
@@ -69,6 +110,13 @@
                   <td><%= o.event_location || '-' %></td>
                   <td><%= o.event_capacity || 'No limit' %></td>
                   <td><%= o.registration_count %></td>
+                  <% if (isManager) { %>
+                  <td>
+                    <form method="POST" action="/events/<%= event.event_id %>/occurrences/<%= o.event_occurrence_id %>/delete" class="inline" onsubmit="return confirm('Delete this occurrence? This will also delete all registrations for this occurrence.')">
+                      <button type="submit" class="btn-danger btn-sm">Delete</button>
+                    </form>
+                  </td>
+                  <% } %>
                 </tr>
               <% }); %>
             </tbody>
