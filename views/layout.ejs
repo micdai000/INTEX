@@ -32,6 +32,11 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="min-h-screen flex flex-col bg-ella-cream text-ella-charcoal font-montserrat">
+  <% if (isHeroPage) { %>
+  <!-- Safari toolbar color bar - visible strip for Safari to detect -->
+  <div style="position: fixed; top: 0; left: 0; right: 0; height: 1px; background-color: #8B2346; z-index: 9999;"></div>
+  <% } %>
+
   <!-- Skip Navigation Link for ADA Compliance -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
