@@ -1,7 +1,50 @@
-<header class="site-header floating-header" role="banner">
-  <!-- Mobile menu overlay -->
-  <div class="nav-overlay" id="navOverlay"></div>
+<!-- Mobile menu overlay - outside header for proper stacking -->
+<div class="nav-overlay" id="navOverlay"></div>
 
+<!-- Mobile navigation menu - outside header for proper stacking -->
+<nav class="nav-menu" id="navMenu" role="navigation" aria-label="Main navigation">
+  <% if (isAuthenticated) { %>
+    <!-- Authenticated Navigation -->
+    <a href="/dashboard" class="nav-link">Dashboard</a>
+
+    <div class="dropdown">
+      <button class="dropdown-toggle">
+        View Data
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+      <div class="dropdown-menu">
+        <a href="/participants">Participants</a>
+        <a href="/events">Events</a>
+        <a href="/surveys">Surveys</a>
+        <a href="/milestones">Milestones</a>
+        <a href="/donations">Donations</a>
+        <% if (isManager) { %>
+          <a href="/users">Users</a>
+        <% } %>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <span class="user-name"><%= user.firstName || user.email %></span>
+      <form action="/auth/logout" method="POST" style="display: inline;">
+        <button type="submit" class="btn-pill btn-pill-secondary">Logout</button>
+      </form>
+    </div>
+  <% } else { %>
+    <!-- Public Navigation -->
+    <a href="/about" class="nav-link">About</a>
+    <a href="/workshops" class="nav-link">Programs</a>
+    <a href="/contact" class="nav-link">Contact</a>
+    <a href="https://givebutter.com/EllaRises" target="_blank" rel="noopener noreferrer" class="nav-link">Donate</a>
+    <div class="nav-actions">
+      <a href="/auth/login" class="btn-pill btn-pill-primary">Login</a>
+    </div>
+  <% } %>
+</nav>
+
+<header class="site-header floating-header" role="banner">
   <div class="floating-nav">
     <!-- Logo -->
     <a href="/" class="logo">
@@ -16,8 +59,8 @@
       <span></span>
     </button>
 
-    <!-- Navigation -->
-    <nav class="nav-menu" id="navMenu" role="navigation" aria-label="Main navigation">
+    <!-- Desktop Navigation (hidden on mobile, visible on desktop) -->
+    <nav class="nav-menu-desktop" role="navigation" aria-label="Main navigation">
       <% if (isAuthenticated) { %>
         <!-- Authenticated Navigation -->
         <a href="/dashboard" class="nav-link">Dashboard</a>
